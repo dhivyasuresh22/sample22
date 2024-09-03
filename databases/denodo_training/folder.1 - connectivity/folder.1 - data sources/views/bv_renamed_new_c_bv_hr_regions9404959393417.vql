@@ -1,0 +1,35 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC "bv_renamed_C_BV_HR_REGIONS9404959393417"
+    FOLDER = '/1 - connectivity/1 - data sources'
+    DATASOURCENAME=ds_historical_orders
+    SCHEMANAME='${databases.denodo_training.folder.1 - connectivity.folder.1 - data sources.views.jdbc.bv_renamed_c_bv_hr_regions9404959393417.SCHEMANAME}' 
+    RELATIONNAME='C_BV_HR_REGIONS9404959393417' 
+    OUTPUTSCHEMA (
+        "REGION_ID" = 'REGION_ID' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='20', sourcetyperadix='10', sourcetypesize='38', sourcetypeid='3', sourcetypename='NUMBER')  SORTABLE,
+        "REGION_NAME" = 'REGION_NAME' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='25', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        "EXPIRATIONDATE" = 'EXPIRATIONDATE' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='38', sourcetypeid='3', sourcetypename='NUMBER')  SORTABLE,
+        "ROWSTATUS" = 'ROWSTATUS' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='255', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE "bv_renamed_new_C_BV_HR_REGIONS9404959393417" I18N au_cst (
+        "REGION_ID":decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '20', sourcetypesize = '38'),
+        "REGION_NAME":text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '25'),
+        "EXPIRATIONDATE":decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '38'),
+        "ROWSTATUS":text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '255')
+    )
+    FOLDER = '/1 - connectivity/1 - data sources'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD "bv_renamed_C_BV_HR_REGIONS9404959393417"(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD "REGION_ID" (any) OPT ANY
+             ADD "REGION_NAME" (any) OPT ANY
+             ADD "EXPIRATIONDATE" (any) OPT ANY
+             ADD "ROWSTATUS" (any) OPT ANY
+        )
+        OUTPUTLIST ("EXPIRATIONDATE", "REGION_ID", "REGION_NAME", "ROWSTATUS"
+        )
+        WRAPPER (jdbc "bv_renamed_C_BV_HR_REGIONS9404959393417")
+    );
+

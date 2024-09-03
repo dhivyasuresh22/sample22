@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW iv_orders_historical FOLDER = '/2 - integration' AS SELECT bv_ho_order_item.order_id AS rev_sum FROM bv_ho_orders AS bv_ho_orders INNER JOIN bv_ho_order_item AS bv_ho_order_item ON bv_ho_orders.id = bv_ho_order_item.order_id  GROUP BY bv_ho_order_item.order_id CONTEXT ('I18N' = 'au_cst');
+
+ALTER VIEW iv_orders_historical
+ LAYOUT (bv_ho_orders = [20, 20, 200, 145], bv_ho_order_item = [330, 40, 200, 85]);
+

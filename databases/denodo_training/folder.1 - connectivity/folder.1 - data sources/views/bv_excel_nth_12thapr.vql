@@ -1,0 +1,20 @@
+﻿CREATE OR REPLACE TABLE bv_excel_nth_12thapr I18N au_cst (
+        id:int (sourcetypeid = '4'),
+        name:text (sourcetypeid = '12'),
+        sheet_name:text (sourcetypeid = '12')
+    )
+    FOLDER = '/1 - connectivity/1 - data sources'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD ds_excel_nth(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD id (any) OPT ANY
+             ADD name (any) OPT ANY
+             ADD sheet_name (any) OPT ANY
+        )
+        OUTPUTLIST (id, name, sheet_name
+        )
+        WRAPPER (custom ds_excel_nth)
+    );
+

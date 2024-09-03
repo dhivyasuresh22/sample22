@@ -1,0 +1,10 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE XML ds_alma_api_nth_get
+    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' GET '${databases.alma_api.datasources.xml.ds_alma_api_nth_get.ROUTE.HTTP.URL}'
+    PAGINATION_SETTINGS (
+      NEXT_TOKEN_PARAMETER = 'https://api-ap.hosted.exlibrisgroup.com/almaws/v1/analytics/reports?path=%2Fshared%2FNanyang%20Technological%20University%2065NTU_INST%2FReports%2FRDA%2FDocDel-ILL%2FDocDel%20QS%20Dashboard%2FDocument%20Delivery%20-%20Borrowing%20Request%20-%20Book%20Chapter%20-%20Full%20details&apikey=l8xxb7a4b3a540c948909c2f9c5e6a969bfe'
+      NEXT_TOKEN_PATH = '44068D47A4353D205A84735AD91591B9BE9C3F7601A9ABCCD8F0DF5ED80AA1F0C67BE3D54815F4A734B437ABFC870138677D3AD05EDC3CA7F06182E34E9D7A2F' )
+    AUTHENTICATION OFF
+    PROXY OFF
+    IGNORE_ROUTE_ERRORS = TRUE;
+

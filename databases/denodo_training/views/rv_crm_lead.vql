@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW rv_crm_lead AS SELECT 'crm' AS email1 FROM iv_all_invoices SQL UNION SELECT 'siebel' AS email1 FROM iv_all_invoices CONTEXT ('I18N' = 'au_cst');
+
+ALTER VIEW rv_crm_lead
+ DELEGATESTATSQUERY = true GET_TABLE_STATS = true ATSOURCE_THROUGH_VDP_ONLY;
+

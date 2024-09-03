@@ -1,0 +1,2 @@
+﻿CREATE OR REPLACE VIEW graphql_view AS SELECT agent_id, sum(status_code) AS code_sum, sum(agent_id) AS agent_sum FROM iv_interactions GROUP BY agent_id ORDER BY code_sum ASC, agent_sum ASC;
+

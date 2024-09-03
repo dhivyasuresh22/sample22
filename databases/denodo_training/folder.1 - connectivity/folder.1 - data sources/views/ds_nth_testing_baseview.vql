@@ -1,0 +1,32 @@
+﻿CREATE OR REPLACE WRAPPER DF ds_nth_testing_baseview
+    FOLDER = '/1 - connectivity/1 - data sources'
+    DATASOURCENAME=ds_nth_testing
+    OUTPUTSCHEMA (
+        foldername = 'foldername' (OBL) (DEFAULTVALUE='2024') EXTERN,
+        year = 'year' (OPT),
+        id = 'id' (OPT),
+        name = 'name' (OPT)
+    );
+
+CREATE OR REPLACE TABLE ds_nth_testing_baseview I18N au_cst (
+        foldername:text (extern),
+        year:text,
+        id:text,
+        name:text
+    )
+    FOLDER = '/1 - connectivity/1 - data sources'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD ds_nth_testing_baseview(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD year (any) OPT ANY
+             ADD id (any) OPT ANY
+             ADD name (any) OPT ANY
+             ADD foldername (=) OBL ONE
+        )
+        OUTPUTLIST (id, name, year
+        )
+        WRAPPER (df ds_nth_testing_baseview)
+    );
+

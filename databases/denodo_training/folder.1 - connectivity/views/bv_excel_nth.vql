@@ -1,0 +1,35 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC bv_excel_nth
+    FOLDER = '/1 - connectivity'
+    DATASOURCENAME=ds_sql_server
+    CATALOGNAME='${databases.denodo_training.folder.1 - connectivity.views.jdbc.bv_excel_nth.CATALOGNAME}' 
+    SCHEMANAME='${databases.denodo_training.folder.1 - connectivity.views.jdbc.bv_excel_nth.SCHEMANAME}' 
+    RELATIONNAME='sample_table_emp' 
+    OUTPUTSCHEMA (
+        idd = 'id' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='int')  SORTABLE,
+        name = 'name' :'java.lang.String' (OPT) (sourcetypesize='4000', sourcetypeid='12', sourcetypename='varchar')  SORTABLE,
+        sheet_name = 'sheet_name' :'java.lang.String' (OPT) (sourcetypesize='4000', sourcetypeid='12', sourcetypename='varchar')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE bv_excel_nth I18N au_cst (
+        idd:int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10', description = 'your description'),
+        name:text (sourcetypeid = '12', sourcetypesize = '4000'),
+        sheet_name:text (sourcetypeid = '12', sourcetypesize = '4000')
+    )
+    FOLDER = '/1 - connectivity'
+    CACHE FULL
+    BATCHSIZEINCACHE DEFAULT
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_excel_nth(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD idd (any) OPT ANY
+             ADD name (any) OPT ANY
+             ADD sheet_name (any) OPT ANY
+        )
+        OUTPUTLIST (idd, name, sheet_name
+        )
+        WRAPPER (jdbc bv_excel_nth)
+    )
+    DATA_LOAD_QUERY = 'select * from bv_excel_nth';
+

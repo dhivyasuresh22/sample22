@@ -1,0 +1,2 @@
+﻿CREATE OR REPLACE VIEW ceil_view AS SELECT date_raised, current_date(), getdaysbetween(date_raised, current_date()), (getdaysbetween(date_raised, current_date())/365.25), ((getdaysbetween(date_raised, current_date())/365.25)*10), (ceil(((getdaysbetween(date_raised, current_date())/365.25)*10))*0.1) AS ceil FROM bv_cc_case_definition WHERE case_id = 48 CONTEXT ('I18N' = 'au_cst');
+

@@ -1,0 +1,147 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER XML bv_alma_api_nth
+    DATASOURCENAME=ds_alma_api_nth_get
+    TUPLEROOT 'report'
+    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' GET '${databases.alma_api.views.xml.bv_alma_api_nth.ROUTE.HTTP.URL}'
+    OUTPUTSCHEMA (report = 'report' : REGISTER OF (
+        "QueryResult" = 'QueryResult' : REGISTER OF (
+            "ResumptionToken" = 'ResumptionToken' : 'java.lang.String',
+            "IsFinished" = 'IsFinished' : 'java.lang.Boolean',
+            "ResultXml" = 'ResultXml' : REGISTER OF (
+                rowset = 'rowset' : REGISTER OF (
+                    "xsd:schema" = 'xsd:schema' : REGISTER OF (
+                        "targetNamespace" = '#targetNamespace' : 'java.lang.String',
+                        "xsd:complexType" = 'xsd:complexType' : REGISTER OF (
+                            name = '#name' : 'java.lang.String',
+                            "xsd:sequence" = 'xsd:sequence' : REGISTER OF (
+                                "xsd:element" = 'xsd:element' : ARRAY OF (
+                                    "xsd:element" = 'xsd:element' : REGISTER OF (
+                                        "maxOccurs" = '#maxOccurs' : 'java.lang.Short',
+                                        "minOccurs" = '#minOccurs' : 'java.lang.Short',
+                                        name = '#name' : 'java.lang.String',
+                                        "saw-sql:aggregationRule" = '#saw-sql:aggregationRule' : 'java.lang.String',
+                                        "saw-sql:aggregationType" = '#saw-sql:aggregationType' : 'java.lang.String',
+                                        "saw-sql:columnHeading" = '#saw-sql:columnHeading' : 'java.lang.String',
+                                        "saw-sql:displayFormula" = '#saw-sql:displayFormula' : 'java.lang.String',
+                                        "saw-sql:length" = '#saw-sql:length' : 'java.lang.Short',
+                                        "saw-sql:precision" = '#saw-sql:precision' : 'java.lang.Short',
+                                        "saw-sql:scale" = '#saw-sql:scale' : 'java.lang.Short',
+                                        "saw-sql:tableHeading" = '#saw-sql:tableHeading' : 'java.lang.String',
+                                        "saw-sql:type" = '#saw-sql:type' : 'java.lang.String',
+                                        type = '#type' : 'java.lang.String'
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    "Row" = 'Row' : ARRAY OF (
+                        "Row" = 'Row' : REGISTER OF (
+                            "Column0" = 'Column0' : 'java.lang.Short',
+                            "Column1" = 'Column1' : 'java.lang.String',
+                            "Column2" = 'Column2' : 'java.lang.String',
+                            "Column3" = 'Column3' : 'java.lang.String',
+                            "Column4" = 'Column4' : 'java.lang.String',
+                            "Column5" = 'Column5' : 'java.lang.String',
+                            "Column6" = 'Column6' : 'java.lang.String',
+                            "Column7" = 'Column7' : 'java.lang.String',
+                            "Column8" = 'Column8' : 'java.lang.String',
+                            "Column9" = 'Column9' : 'java.lang.String',
+                            "Column10" = 'Column10' : 'java.lang.String',
+                            "Column11" = 'Column11' : 'java.lang.String',
+                            "Column12" = 'Column12' : 'java.lang.Float',
+                            "Column13" = 'Column13' : 'java.lang.String',
+                            "Column14" = 'Column14' : 'java.lang.String',
+                            "Column15" = 'Column15' : 'java.lang.String',
+                            "Column18" = 'Column18' : 'java.lang.String',
+                            "Column19" = 'Column19' : 'java.lang.Float',
+                            "Column16" = 'Column16' : 'java.lang.String',
+                            "Column17" = 'Column17' : 'java.lang.String'
+                        )
+                    )
+                )
+            )
+        )
+    )
+    );
+
+CREATE OR REPLACE TYPE "ds_alma_api_nth_QueryResult_ResultXml_rowset_xsdschema_xsdcomplexType_xsdsequence_xsdelement_xsdel_0" AS REGISTER OF ("maxOccurs":int, "minOccurs":int, name:text, "saw-sql:aggregationRule":text, "saw-sql:aggregationType":text, "saw-sql:columnHeading":text, "saw-sql:displayFormula":text, "saw-sql:length":int, "saw-sql:precision":int, "saw-sql:scale":int, "saw-sql:tableHeading":text, "saw-sql:type":text, type:text);
+
+CREATE OR REPLACE TYPE "ds_alma_api_nth_QueryResult_ResultXml_rowset_xsd:schema_xsd:complexType_xsd:sequence_xsd:element" AS ARRAY OF "ds_alma_api_nth_QueryResult_ResultXml_rowset_xsdschema_xsdcomplexType_xsdsequence_xsdelement_xsdel_0";
+
+CREATE OR REPLACE TYPE "ds_alma_api_nth_QueryResult_ResultXml_rowset_xsd:schema_xsd:complexType_xsd:sequence" AS REGISTER OF ("xsd:element":"ds_alma_api_nth_QueryResult_ResultXml_rowset_xsd:schema_xsd:complexType_xsd:sequence_xsd:element");
+
+CREATE OR REPLACE TYPE "ds_alma_api_nth_QueryResult_ResultXml_rowset_xsd:schema_xsd:complexType" AS REGISTER OF (name:text, "xsd:sequence":"ds_alma_api_nth_QueryResult_ResultXml_rowset_xsd:schema_xsd:complexType_xsd:sequence");
+
+CREATE OR REPLACE TYPE "ds_alma_api_nth_QueryResult_ResultXml_rowset_xsd:schema" AS REGISTER OF ("targetNamespace":text, "xsd:complexType":"ds_alma_api_nth_QueryResult_ResultXml_rowset_xsd:schema_xsd:complexType");
+
+CREATE OR REPLACE TYPE "ds_alma_api_nth_QueryResult_ResultXml_rowset_Row_Row" AS REGISTER OF ("Column0":int, "Column1":text, "Column2":text, "Column3":text, "Column4":text, "Column5":text, "Column6":text, "Column7":text, "Column8":text, "Column9":text, "Column10":text, "Column11":text, "Column12":float, "Column13":text, "Column14":text, "Column15":text, "Column18":text, "Column19":float, "Column16":text, "Column17":text);
+
+CREATE OR REPLACE TYPE "ds_alma_api_nth_QueryResult_ResultXml_rowset_Row" AS ARRAY OF "ds_alma_api_nth_QueryResult_ResultXml_rowset_Row_Row";
+
+CREATE OR REPLACE TYPE "ds_alma_api_nth_QueryResult_ResultXml_rowset" AS REGISTER OF ("xsd:schema":"ds_alma_api_nth_QueryResult_ResultXml_rowset_xsd:schema", "Row":"ds_alma_api_nth_QueryResult_ResultXml_rowset_Row");
+
+CREATE OR REPLACE TYPE "ds_alma_api_nth_QueryResult_ResultXml" AS REGISTER OF (rowset:"ds_alma_api_nth_QueryResult_ResultXml_rowset");
+
+CREATE OR REPLACE TYPE "ds_alma_api_nth_QueryResult" AS REGISTER OF ("ResumptionToken":text, "IsFinished":boolean, "ResultXml":"ds_alma_api_nth_QueryResult_ResultXml");
+
+CREATE OR REPLACE TABLE bv_alma_api_nth I18N us_pst (
+        "QueryResult":"ds_alma_api_nth_QueryResult"
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_alma_api_nth(
+        I18N us_pst
+        CONSTRAINTS (
+             ADD "QueryResult" NOS ZERO ()
+             ADD "QueryResult"."ResumptionToken" NOS ZERO ()
+             ADD "QueryResult"."IsFinished" NOS ZERO ()
+             ADD "QueryResult"."ResultXml" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."xsd:schema" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."xsd:schema"."targetNamespace" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."xsd:schema"."xsd:complexType" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."xsd:schema"."xsd:complexType".name NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."xsd:schema"."xsd:complexType"."xsd:sequence" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."xsd:schema"."xsd:complexType"."xsd:sequence"."xsd:element" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."xsd:schema"."xsd:complexType"."xsd:sequence"."xsd:element" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."xsd:schema"."xsd:complexType"."xsd:sequence"."xsd:element"."maxOccurs" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."xsd:schema"."xsd:complexType"."xsd:sequence"."xsd:element"."minOccurs" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."xsd:schema"."xsd:complexType"."xsd:sequence"."xsd:element".name NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."xsd:schema"."xsd:complexType"."xsd:sequence"."xsd:element"."saw-sql:aggregationRule" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."xsd:schema"."xsd:complexType"."xsd:sequence"."xsd:element"."saw-sql:aggregationType" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."xsd:schema"."xsd:complexType"."xsd:sequence"."xsd:element"."saw-sql:columnHeading" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."xsd:schema"."xsd:complexType"."xsd:sequence"."xsd:element"."saw-sql:displayFormula" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."xsd:schema"."xsd:complexType"."xsd:sequence"."xsd:element"."saw-sql:length" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."xsd:schema"."xsd:complexType"."xsd:sequence"."xsd:element"."saw-sql:precision" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."xsd:schema"."xsd:complexType"."xsd:sequence"."xsd:element"."saw-sql:scale" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."xsd:schema"."xsd:complexType"."xsd:sequence"."xsd:element"."saw-sql:tableHeading" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."xsd:schema"."xsd:complexType"."xsd:sequence"."xsd:element"."saw-sql:type" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."xsd:schema"."xsd:complexType"."xsd:sequence"."xsd:element".type NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column0" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column1" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column2" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column3" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column4" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column5" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column6" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column7" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column8" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column9" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column10" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column11" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column12" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column13" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column14" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column15" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column18" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column19" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column16" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column17" NOS ZERO ()
+        )
+        OUTPUTLIST ("QueryResult"
+        )
+        WRAPPER (xml bv_alma_api_nth)
+    );
+

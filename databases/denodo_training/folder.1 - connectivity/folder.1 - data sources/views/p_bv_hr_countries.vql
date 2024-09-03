@@ -1,0 +1,2 @@
+﻿CREATE OR REPLACE VIEW p_bv_hr_countries FOLDER = '/1 - connectivity/1 - data sources' AS SELECT bv_hr_countries.country_id AS country_id, bv_hr_countries.country_name AS country_name, bv_hr_countries.region_id AS region_id FROM bv_hr_countries CONTEXT ('I18N' = 'au_cst');
+

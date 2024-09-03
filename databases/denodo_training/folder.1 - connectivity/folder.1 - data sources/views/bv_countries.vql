@@ -1,0 +1,37 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC "bv_cnty_rename_beforeCOUNTRIES"
+    FOLDER = '/1 - connectivity/1 - data sources'
+    DATASOURCENAME=ds_human_resources
+    SCHEMANAME='${databases.denodo_training.folder.1 - connectivity.folder.1 - data sources.views.jdbc.bv_cnty_rename_beforecountries.SCHEMANAME}' 
+    RELATIONNAME='COUNTRIES' 
+    OUTPUTSCHEMA (
+        "COUNTRY_ID" = 'COUNTRY_ID' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='2', sourcetypeid='1', sourcetypename='CHAR')  NOT NULL SORTABLE,
+        "COUNTRY_NAME" = 'COUNTRY_NAME' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='40', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        "REGION_ID" = 'REGION_ID' :'java.math.BigDecimal' (OPT) (sourcetyperadix='10', sourcetypeid='3', sourcetypename='NUMBER')  SORTABLE
+    )
+    CONSTRAINT 'COUNTRY_C_ID_PK' PRIMARY KEY ( 'COUNTRY_ID' )
+    CONSTRAINT 'COUNTR_REG_FK' FOREIGN KEY ( 'REGION_ID' ) 
+    REFERENCES 'HUMAN_RESOURCES'.'REGIONS'( 'REGION_ID' )  ON DELETE RESTRICT NOT DEFERRABLE 
+    INDEX 'COUNTRY_C_ID_PK' CLUSTER UNIQUE PRIMARY ( 'COUNTRY_ID' );
+
+CREATE OR REPLACE TABLE "bv_COUNTRIES" I18N au_cst (
+        "COUNTRY_ID":text (notnull, sourcetypeid = '1', sourcetyperadix = '10', sourcetypesize = '2'),
+        "COUNTRY_NAME":text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '40'),
+        "REGION_ID":decimal (sourcetypeid = '3', sourcetyperadix = '10')
+    )
+    FOLDER = '/1 - connectivity/1 - data sources'
+    CONSTRAINT 'COUNTRY_C_ID_PK' PRIMARY KEY ( 'COUNTRY_ID' )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD "bv_cnty_rename_beforeCOUNTRIES"(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD "COUNTRY_ID" (any) OPT ANY
+             ADD "COUNTRY_NAME" (any) OPT ANY
+             ADD "REGION_ID" (any) OPT ANY
+        )
+        OUTPUTLIST ("COUNTRY_ID", "COUNTRY_NAME", "REGION_ID"
+        )
+        WRAPPER (jdbc "bv_cnty_rename_beforeCOUNTRIES")
+    );
+

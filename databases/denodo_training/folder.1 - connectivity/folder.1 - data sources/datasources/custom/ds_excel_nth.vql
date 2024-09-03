@@ -1,0 +1,22 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE CUSTOM ds_excel_nth
+    FOLDER = '/1 - connectivity/1 - data sources'
+    CLASSNAME='com.denodo.vdb.contrib.wrapper.xls.ExcelWrapper';
+
+CREATE OR REPLACE WRAPPER CUSTOM ds_excel_nth
+    FOLDER = '/1 - connectivity/1 - data sources'
+    DATASOURCENAME=ds_excel_nth
+    PARAMETERS (
+      'Type of file' = 'Excel 2007 or later (*.xlsx)',
+      'File location' = ROUTE LOCAL 'LocalConnection' '${databases.denodo_training.folder.1 - connectivity.folder.1 - data sources.views.custom.ds_excel_nth.File location.ROUTE.LOCAL.PATH}',
+      'Extract data from all sheets' = true,
+      'Extract sheet name as a new column' = true,
+      'Has headers' = true,
+      'Stream tuples' = true
+    )
+    OUTPUTSCHEMA (
+        id = 'id' : 'java.lang.Integer' (OPT) (sourcetypeid='4')  SORTABLE,
+        name = 'name' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE,
+        sheet_name = 'sheet_name' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE
+    );
+

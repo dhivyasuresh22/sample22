@@ -1,0 +1,38 @@
+﻿CREATE OR REPLACE WRAPPER DF ds_sample_file
+    FOLDER = '/1 - connectivity/1 - data sources'
+    DATASOURCENAME=ds_sample_file
+    OUTPUTSCHEMA (
+        column0 = 'Column0' (OPT),
+        column1 = 'Column1' (OPT),
+        column2 = 'Column2' (OPT),
+        column3 = 'Column3' (OPT),
+        column4 = 'Column4' (OPT),
+        column5 = 'Column5' (OPT)
+    );
+
+CREATE OR REPLACE TABLE ds_sample_file I18N au_cst (
+        column0:text,
+        column1:text,
+        column2:text,
+        column3:text,
+        column4:text,
+        column5:text
+    )
+    FOLDER = '/1 - connectivity/1 - data sources'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD ds_sample_file(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD column0 (any) OPT ANY
+             ADD column1 (any) OPT ANY
+             ADD column2 (any) OPT ANY
+             ADD column3 (any) OPT ANY
+             ADD column4 (any) OPT ANY
+             ADD column5 (any) OPT ANY
+        )
+        OUTPUTLIST (column0, column1, column2, column3, column4, column5
+        )
+        WRAPPER (df ds_sample_file)
+    );
+

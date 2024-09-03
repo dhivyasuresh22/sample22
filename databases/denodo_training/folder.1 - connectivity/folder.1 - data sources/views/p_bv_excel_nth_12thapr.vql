@@ -1,0 +1,2 @@
+﻿CREATE OR REPLACE VIEW p_bv_excel_nth_12thapr FOLDER = '/1 - connectivity/1 - data sources' AS SELECT bv_excel_nth_12thapr.id AS id, bv_excel_nth_12thapr.name AS name, bv_excel_nth_12thapr.sheet_name AS sheet_name FROM bv_excel_nth_12thapr WHERE id is not null  CONTEXT ('I18N' = 'au_cst');
+

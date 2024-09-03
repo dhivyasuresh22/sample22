@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE DATABASE alma_api '';
+
+ALTER DATABASE alma_api
+  CHARSET DEFAULT;
+

@@ -1,0 +1,2 @@
+﻿CREATE OR REPLACE VIEW p_bv_cc_agent FOLDER = '/1 - connectivity/1 - data sources' AS SELECT agent_code AS agent_code FROM bv_cc_agent GROUP BY agent_code CONTEXT ('I18N' = 'au_cst');
+

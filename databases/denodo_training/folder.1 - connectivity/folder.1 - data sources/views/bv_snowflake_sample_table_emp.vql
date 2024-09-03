@@ -1,0 +1,34 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC bv_snowflake_sample_table_emp
+    FOLDER = '/1 - connectivity/1 - data sources'
+    DATASOURCENAME=ds_snowflake
+    CATALOGNAME='${databases.denodo_training.folder.1 - connectivity.folder.1 - data sources.views.jdbc.bv_snowflake_sample_table_emp.CATALOGNAME}' 
+    SCHEMANAME='${databases.denodo_training.folder.1 - connectivity.folder.1 - data sources.views.jdbc.bv_snowflake_sample_table_emp.SCHEMANAME}' 
+    RELATIONNAME='SAMPLE_TABLE_EMP' 
+    OUTPUTSCHEMA (
+        id = 'ID' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetypesize='38', description='', sourcetypeid='-5', sourcetypename='NUMBER')  SORTABLE,
+        field_0 = 'FIELD_0' :'java.lang.String' (OPT) (sourcetypedecimals='0', sourcetypesize='4000', description='', sourcetypeid='12', sourcetypename='VARCHAR')  SORTABLE,
+        sheet_name = 'SHEET_NAME' :'java.lang.String' (OPT) (sourcetypedecimals='0', sourcetypesize='4000', description='', sourcetypeid='12', sourcetypename='VARCHAR')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE bv_snowflake_sample_table_emp I18N au_cst (
+        id:decimal (sourcetypeid = '2', sourcetypedecimals = '0', sourcetypesize = '38', description = ''),
+        field_0:text (sourcetypeid = '-9', sourcetypedecimals = '0', sourcetypesize = '4000', description = ''),
+        sheet_name:text (sourcetypeid = '-9', sourcetypedecimals = '0', sourcetypesize = '4000', description = '')
+    )
+    FOLDER = '/1 - connectivity/1 - data sources'
+    CACHE PARTIAL
+    BATCHSIZEINCACHE DEFAULT
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_snowflake_sample_table_emp(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD id (any) OPT ANY
+             ADD field_0 (any) OPT ANY
+             ADD sheet_name (any) OPT ANY
+        )
+        OUTPUTLIST (field_0, id, sheet_name
+        )
+        WRAPPER (jdbc bv_snowflake_sample_table_emp)
+    );
+

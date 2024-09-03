@@ -1,0 +1,27 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC test_summary
+    DATASOURCENAME=ds_sql_server
+    CATALOGNAME='${databases.denodo_training.views.jdbc.test_summary.CATALOGNAME}' ESCAPE
+    SCHEMANAME='${databases.denodo_training.views.jdbc.test_summary.SCHEMANAME}' ESCAPE
+    RELATIONNAME='REMOTE_ORDERS' 
+    OUTPUTSCHEMA (
+        id = 'id' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetypesize='38', sourcetypeid='2', sourcetypename='NUMERIC')  SORTABLE NOT UPDATEABLE,
+        count = 'field_0' :'java.lang.Long' (OPT) (sourcetypeid='-5', sourcetypename='BIGINT')  SORTABLE NOT UPDATEABLE
+    );
+
+CREATE OR REPLACE SUMMARY VIEW test_summary (
+        id:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '38'),
+        count:long
+    )
+    ADD SEARCHMETHOD test_summary(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD id (any) OPT ANY
+             ADD count (any) OPT ANY
+        )
+        OUTPUTLIST (count, id
+        )
+        WRAPPER (jdbc test_summary)
+    )
+AS SELECT bv_ho_orders.id AS id, count AS count FROM (SELECT id, count(status) AS count FROM bv_ho_orders GROUP BY id) CONTEXT ('I18N'='au_cst');
+
