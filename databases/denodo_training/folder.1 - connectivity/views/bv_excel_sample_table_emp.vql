@@ -1,0 +1,31 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC bv_excel_sample_table_emp
+    FOLDER = '/1 - connectivity'
+    DATASOURCENAME=ds_snowflake
+    CATALOGNAME='${databases.denodo_training.folder.1 - connectivity.views.jdbc.bv_excel_sample_table_emp.CATALOGNAME}' 
+    SCHEMANAME='${databases.denodo_training.folder.1 - connectivity.views.jdbc.bv_excel_sample_table_emp.SCHEMANAME}' 
+    RELATIONNAME='SAMPLE_TABLE_EMP' 
+    OUTPUTSCHEMA (
+        column_0 = 'COLUMN_0' :'java.lang.String' (OPT) (sourcetypedecimals='0', sourcetypesize='4000', description='', sourcetypeid='12', sourcetypename='VARCHAR')  SORTABLE,
+        column_1 = 'COLUMN_1' :'java.lang.String' (OPT) (sourcetypedecimals='0', sourcetypesize='4000', description='', sourcetypeid='12', sourcetypename='VARCHAR')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE bv_excel_sample_table_emp I18N au_cst (
+        column_0:text (sourcetypeid = '-9', sourcetypedecimals = '0', sourcetypesize = '4000', description = ''),
+        column_1:text (sourcetypeid = '-9', sourcetypedecimals = '0', sourcetypesize = '4000', description = '')
+    )
+    FOLDER = '/1 - connectivity'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_excel_sample_table_emp(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD column_0 (any) OPT ANY
+             ADD column_1 (any) OPT ANY
+        )
+        OUTPUTLIST (column_0, column_1
+        )
+        WRAPPER (jdbc bv_excel_sample_table_emp)
+    )
+    DATA_LOAD_QUERY = 'select * from bv_excel_sample_table_emp where column_0 is not null';
+

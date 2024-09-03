@@ -1,0 +1,27 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC my_summary
+    DATASOURCENAME=ds_sql_server
+    CATALOGNAME='${databases.denodo_training.views.jdbc.my_summary.CATALOGNAME}' 
+    SCHEMANAME='${databases.denodo_training.views.jdbc.my_summary.SCHEMANAME}' 
+    RELATIONNAME='my_summary' 
+    OUTPUTSCHEMA (
+        id = 'id' :'java.lang.String' (OPT) (sourcetypesize='10', sourcetypeid='-15', sourcetypename='nchar')  SORTABLE,
+        count = 'field_0' :'java.lang.Long' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='19', sourcetypeid='-5', sourcetypename='bigint')  SORTABLE
+    );
+
+CREATE OR REPLACE SUMMARY VIEW my_summary (
+        id:text (sourcetypeid = '-15', sourcetypesize = '10'),
+        count:long (sourcetypeid = '-5', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '19')
+    )
+    ADD SEARCHMETHOD my_summary(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD id (any) OPT ANY
+             ADD count (any) OPT ANY
+        )
+        OUTPUTLIST (count, id
+        )
+        WRAPPER (jdbc my_summary)
+    )
+AS SELECT bv_sql_server_emp_new.id AS id, count AS count FROM (SELECT id, count(1) AS count FROM bv_sql_server_emp_new GROUP BY id) CONTEXT ('I18N'='au_cst');
+

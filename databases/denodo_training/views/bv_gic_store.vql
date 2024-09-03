@@ -1,0 +1,29 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC bv_gic_store
+    DATASOURCENAME=ds_sql_server
+    CATALOGNAME='${databases.denodo_training.views.jdbc.bv_gic_store.CATALOGNAME}' 
+    SCHEMANAME='${databases.denodo_training.views.jdbc.bv_gic_store.SCHEMANAME}' 
+    RELATIONNAME='emp2' 
+    OUTPUTSCHEMA (
+        id = 'id' :'java.lang.String' (OPT) (sourcetypesize='10', sourcetypeid='-15', sourcetypename='nchar')  SORTABLE,
+        name = 'name' :'java.lang.String' (OPT) (sourcetypesize='10', sourcetypeid='-15', sourcetypename='nchar')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE bv_gic_store I18N au_cst (
+        id:text (sourcetypeid = '-15', sourcetypesize = '10'),
+        name:text (sourcetypeid = '-15', sourcetypesize = '10')
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_gic_store(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD id (any) OPT ANY
+             ADD name (any) OPT ANY
+        )
+        OUTPUTLIST (id, name
+        )
+        WRAPPER (jdbc bv_gic_store)
+    )
+    DATA_LOAD_QUERY = 'select * from bv_sql_server_emp_new';
+

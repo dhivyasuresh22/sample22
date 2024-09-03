@@ -1,0 +1,31 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC "bv_EMP_sql_server"
+    FOLDER = '/1 - connectivity/1 - data sources'
+    DATASOURCENAME=ds_sql_server
+    CATALOGNAME='${databases.denodo_training.folder.1 - connectivity.folder.1 - data sources.views.jdbc.bv_emp_sql_server.CATALOGNAME}' 
+    SCHEMANAME='${databases.denodo_training.folder.1 - connectivity.folder.1 - data sources.views.jdbc.bv_emp_sql_server.SCHEMANAME}' 
+    RELATIONNAME='EMP' 
+    OUTPUTSCHEMA (
+        id = 'id' :'java.lang.String' (OPT) (sourcetypesize='10', sourcetypeid='-15', sourcetypename='nchar')  SORTABLE,
+        name = 'name' :'java.lang.String' (OPT) (sourcetypesize='10', sourcetypeid='-15', sourcetypename='nchar')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE "bv_EMP_sql_server" I18N au_cst (
+        id:text (sourcetypeid = '-15', sourcetypesize = '10'),
+        name:text (sourcetypeid = '-15', sourcetypesize = '10')
+    )
+    FOLDER = '/1 - connectivity/1 - data sources'
+    CACHE OFF
+    BATCHSIZEINCACHE DEFAULT
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD "bv_EMP_sql_server"(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD id (any) OPT ANY
+             ADD name (any) OPT ANY
+        )
+        OUTPUTLIST (id, name
+        )
+        WRAPPER (jdbc "bv_EMP_sql_server")
+    );
+

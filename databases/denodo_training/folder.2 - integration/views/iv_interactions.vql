@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW iv_interactions FOLDER = '/2 - integration' AS SELECT call_id, location_id, problem_code, status_code, date_ticket_issued, date_call_received, other_details, caller_phone, case_id, agent_id, customer_code, customer_phone, customer_address, customer_ip, agent_name, sum(case_id) AS rev_sum FROM (SELECT * FROM bv_cc_service_call EXTENDED UNION ALL SELECT customer_code, customer_phone, customer_ip, agent_id, status_code, agent_name, sr_date AS date_call_received, customer_address FROM bv_support_get_all_service_request) GROUP BY call_id, location_id, problem_code, status_code, date_ticket_issued, date_call_received, other_details, caller_phone, case_id, agent_id, customer_code, customer_phone, customer_address, customer_ip, agent_name CONTEXT ('I18N' = 'au_cst');
+
+ALTER VIEW iv_interactions
+ LAYOUT (bv_cc_service_call = [20, 20, 200, 225], bv_support_get_all_service_request = [250, 20, 200, 225]);
+

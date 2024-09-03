@@ -1,0 +1,108 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC bv_gic_store_returns
+    FOLDER = '/1 - connectivity/1 - data sources'
+    DATASOURCENAME=ds_snowflake
+    CATALOGNAME='${databases.denodo_training.folder.1 - connectivity.folder.1 - data sources.views.jdbc.bv_gic_store_returns.CATALOGNAME}' 
+    SCHEMANAME='${databases.denodo_training.folder.1 - connectivity.folder.1 - data sources.views.jdbc.bv_gic_store_returns.SCHEMANAME}' 
+    RELATIONNAME='STORE_RETURNS' 
+    OUTPUTSCHEMA (
+        sr_returned_date_sk = 'SR_RETURNED_DATE_SK' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetypesize='38', description='', sourcetypeid='-5', sourcetypename='NUMBER')  SORTABLE,
+        sr_return_time_sk = 'SR_RETURN_TIME_SK' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetypesize='38', description='', sourcetypeid='-5', sourcetypename='NUMBER')  SORTABLE,
+        sr_item_sk = 'SR_ITEM_SK' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetypesize='38', description='', sourcetypeid='-5', sourcetypename='NUMBER')  NOT NULL SORTABLE,
+        sr_customer_sk = 'SR_CUSTOMER_SK' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetypesize='38', description='', sourcetypeid='-5', sourcetypename='NUMBER')  SORTABLE,
+        sr_cdemo_sk = 'SR_CDEMO_SK' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetypesize='38', description='', sourcetypeid='-5', sourcetypename='NUMBER')  SORTABLE,
+        sr_hdemo_sk = 'SR_HDEMO_SK' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetypesize='38', description='', sourcetypeid='-5', sourcetypename='NUMBER')  SORTABLE,
+        sr_addr_sk = 'SR_ADDR_SK' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetypesize='38', description='', sourcetypeid='-5', sourcetypename='NUMBER')  SORTABLE,
+        sr_store_sk = 'SR_STORE_SK' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetypesize='38', description='', sourcetypeid='-5', sourcetypename='NUMBER')  SORTABLE,
+        sr_reason_sk = 'SR_REASON_SK' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetypesize='38', description='', sourcetypeid='-5', sourcetypename='NUMBER')  SORTABLE,
+        sr_ticket_number = 'SR_TICKET_NUMBER' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetypesize='38', description='', sourcetypeid='-5', sourcetypename='NUMBER')  NOT NULL SORTABLE,
+        sr_return_quantity = 'SR_RETURN_QUANTITY' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetypesize='38', description='', sourcetypeid='-5', sourcetypename='NUMBER')  SORTABLE,
+        sr_return_amt = 'SR_RETURN_AMT' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetypesize='7', description='', sourcetypeid='3', sourcetypename='NUMBER')  SORTABLE,
+        sr_return_tax = 'SR_RETURN_TAX' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetypesize='7', description='', sourcetypeid='3', sourcetypename='NUMBER')  SORTABLE,
+        sr_return_amt_inc_tax = 'SR_RETURN_AMT_INC_TAX' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetypesize='7', description='', sourcetypeid='3', sourcetypename='NUMBER')  SORTABLE,
+        sr_fee = 'SR_FEE' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetypesize='7', description='', sourcetypeid='3', sourcetypename='NUMBER')  SORTABLE,
+        sr_return_ship_cost = 'SR_RETURN_SHIP_COST' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetypesize='7', description='', sourcetypeid='3', sourcetypename='NUMBER')  SORTABLE,
+        sr_refunded_cash = 'SR_REFUNDED_CASH' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetypesize='7', description='', sourcetypeid='3', sourcetypename='NUMBER')  SORTABLE,
+        sr_reversed_charge = 'SR_REVERSED_CHARGE' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetypesize='7', description='', sourcetypeid='3', sourcetypename='NUMBER')  SORTABLE,
+        sr_store_credit = 'SR_STORE_CREDIT' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetypesize='7', description='', sourcetypeid='3', sourcetypename='NUMBER')  SORTABLE,
+        sr_net_loss = 'SR_NET_LOSS' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetypesize='7', description='', sourcetypeid='3', sourcetypename='NUMBER')  SORTABLE
+    )
+    CONSTRAINT 'SYS_CONSTRAINT_6c9d2681-6369-4ec6-8d58-891ab15e810b' PRIMARY KEY ( 'SR_ITEM_SK' , 'SR_TICKET_NUMBER' )
+    CONSTRAINT 'SYS_CONSTRAINT_955b0d51-ec92-419f-89ba-0c0170cbfa0a' FOREIGN KEY ( 'SR_CUSTOMER_SK' ) 
+    REFERENCES 'SAMPLE_PUBLIC'.'TPCDS_SF10TCL'.'CUSTOMER'( 'C_CUSTOMER_SK' )  ON UPDATE NO ACTION  ON DELETE NO ACTION NOT DEFERRABLE 
+    CONSTRAINT 'SYS_CONSTRAINT_cc3cc787-ca29-4639-80a9-fa928b5804e9' FOREIGN KEY ( 'SR_ADDR_SK' ) 
+    REFERENCES 'SAMPLE_PUBLIC'.'TPCDS_SF10TCL'.'CUSTOMER_ADDRESS'( 'CA_ADDRESS_SK' )  ON UPDATE NO ACTION  ON DELETE NO ACTION NOT DEFERRABLE 
+    CONSTRAINT 'SYS_CONSTRAINT_f0e219cd-2b57-4370-b754-7b364c5fdd20' FOREIGN KEY ( 'SR_CDEMO_SK' ) 
+    REFERENCES 'SAMPLE_PUBLIC'.'TPCDS_SF10TCL'.'CUSTOMER_DEMOGRAPHICS'( 'CD_DEMO_SK' )  ON UPDATE NO ACTION  ON DELETE NO ACTION NOT DEFERRABLE 
+    CONSTRAINT 'SYS_CONSTRAINT_1b350fff-b816-476c-95c8-61f894f7aed8' FOREIGN KEY ( 'SR_RETURNED_DATE_SK' ) 
+    REFERENCES 'SAMPLE_PUBLIC'.'TPCDS_SF10TCL'.'DATE_DIM'( 'D_DATE_SK' )  ON UPDATE NO ACTION  ON DELETE NO ACTION NOT DEFERRABLE 
+    CONSTRAINT 'SYS_CONSTRAINT_cf049239-7e9d-47f9-b32e-25fa99c2967d' FOREIGN KEY ( 'SR_HDEMO_SK' ) 
+    REFERENCES 'SAMPLE_PUBLIC'.'TPCDS_SF10TCL'.'HOUSEHOLD_DEMOGRAPHICS'( 'HD_DEMO_SK' )  ON UPDATE NO ACTION  ON DELETE NO ACTION NOT DEFERRABLE 
+    CONSTRAINT 'SYS_CONSTRAINT_11efc71d-b0ba-432f-aee8-6d72572a5d3b' FOREIGN KEY ( 'SR_ITEM_SK' ) 
+    REFERENCES 'SAMPLE_PUBLIC'.'TPCDS_SF10TCL'.'ITEM'( 'I_ITEM_SK' )  ON UPDATE NO ACTION  ON DELETE NO ACTION NOT DEFERRABLE 
+    CONSTRAINT 'SYS_CONSTRAINT_1b6b218f-e3a4-4982-9843-b8db572554e9' FOREIGN KEY ( 'SR_REASON_SK' ) 
+    REFERENCES 'SAMPLE_PUBLIC'.'TPCDS_SF10TCL'.'REASON'( 'R_REASON_SK' )  ON UPDATE NO ACTION  ON DELETE NO ACTION NOT DEFERRABLE 
+    CONSTRAINT 'SYS_CONSTRAINT_6db5fbb2-e21b-4ba7-979b-36d0d3c74316' FOREIGN KEY ( 'SR_STORE_SK' ) 
+    REFERENCES 'SAMPLE_PUBLIC'.'TPCDS_SF10TCL'.'STORE'( 'S_STORE_SK' )  ON UPDATE NO ACTION  ON DELETE NO ACTION NOT DEFERRABLE 
+    CONSTRAINT 'SYS_CONSTRAINT_2af738df-5e6c-4857-929a-1629be899453' FOREIGN KEY ( 'SR_ITEM_SK' , 'SR_TICKET_NUMBER' ) 
+    REFERENCES 'SAMPLE_PUBLIC'.'TPCDS_SF10TCL'.'STORE_SALES'( 'SS_ITEM_SK' , 'SS_TICKET_NUMBER' )  ON UPDATE NO ACTION  ON DELETE NO ACTION NOT DEFERRABLE 
+    CONSTRAINT 'SYS_CONSTRAINT_b751d178-a9ff-49bb-88c6-a60d30f16753' FOREIGN KEY ( 'SR_RETURN_TIME_SK' ) 
+    REFERENCES 'SAMPLE_PUBLIC'.'TPCDS_SF10TCL'.'TIME_DIM'( 'T_TIME_SK' )  ON UPDATE NO ACTION  ON DELETE NO ACTION NOT DEFERRABLE ;
+
+CREATE OR REPLACE TABLE bv_gic_store_returns I18N au_cst (
+        sr_returned_date_sk:decimal (sourcetypeid = '2', sourcetypedecimals = '0', sourcetypesize = '38', description = ''),
+        sr_return_time_sk:decimal (sourcetypeid = '2', sourcetypedecimals = '0', sourcetypesize = '38', description = ''),
+        sr_item_sk:decimal (notnull, sourcetypeid = '2', sourcetypedecimals = '0', sourcetypesize = '38', description = ''),
+        sr_customer_sk:decimal (sourcetypeid = '2', sourcetypedecimals = '0', sourcetypesize = '38', description = ''),
+        sr_cdemo_sk:decimal (sourcetypeid = '2', sourcetypedecimals = '0', sourcetypesize = '38', description = ''),
+        sr_hdemo_sk:decimal (sourcetypeid = '2', sourcetypedecimals = '0', sourcetypesize = '38', description = ''),
+        sr_addr_sk:decimal (sourcetypeid = '2', sourcetypedecimals = '0', sourcetypesize = '38', description = ''),
+        sr_store_sk:decimal (sourcetypeid = '2', sourcetypedecimals = '0', sourcetypesize = '38', description = ''),
+        sr_reason_sk:decimal (sourcetypeid = '2', sourcetypedecimals = '0', sourcetypesize = '38', description = ''),
+        sr_ticket_number:decimal (notnull, sourcetypeid = '2', sourcetypedecimals = '0', sourcetypesize = '38', description = ''),
+        sr_return_quantity:decimal (sourcetypeid = '2', sourcetypedecimals = '0', sourcetypesize = '38', description = ''),
+        sr_return_amt:decimal (sourcetypeid = '2', sourcetypedecimals = '2', sourcetypesize = '7', description = ''),
+        sr_return_tax:decimal (sourcetypeid = '2', sourcetypedecimals = '2', sourcetypesize = '7', description = ''),
+        sr_return_amt_inc_tax:decimal (sourcetypeid = '2', sourcetypedecimals = '2', sourcetypesize = '7', description = ''),
+        sr_fee:decimal (sourcetypeid = '2', sourcetypedecimals = '2', sourcetypesize = '7', description = ''),
+        sr_return_ship_cost:decimal (sourcetypeid = '2', sourcetypedecimals = '2', sourcetypesize = '7', description = ''),
+        sr_refunded_cash:decimal (sourcetypeid = '2', sourcetypedecimals = '2', sourcetypesize = '7', description = ''),
+        sr_reversed_charge:decimal (sourcetypeid = '2', sourcetypedecimals = '2', sourcetypesize = '7', description = ''),
+        sr_store_credit:decimal (sourcetypeid = '2', sourcetypedecimals = '2', sourcetypesize = '7', description = ''),
+        sr_net_loss:decimal (sourcetypeid = '2', sourcetypedecimals = '2', sourcetypesize = '7', description = '')
+    )
+    FOLDER = '/1 - connectivity/1 - data sources'
+    CONSTRAINT 'SYS_CONSTRAINT_6c9d2681-6369-4ec6-8d58-891ab15e810b' PRIMARY KEY ( 'sr_item_sk' , 'sr_ticket_number' )
+    CACHE OFF
+    BATCHSIZEINCACHE DEFAULT
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_gic_store_returns(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD sr_returned_date_sk (any) OPT ANY
+             ADD sr_return_time_sk (any) OPT ANY
+             ADD sr_item_sk (any) OPT ANY
+             ADD sr_customer_sk (any) OPT ANY
+             ADD sr_cdemo_sk (any) OPT ANY
+             ADD sr_hdemo_sk (any) OPT ANY
+             ADD sr_addr_sk (any) OPT ANY
+             ADD sr_store_sk (any) OPT ANY
+             ADD sr_reason_sk (any) OPT ANY
+             ADD sr_ticket_number (any) OPT ANY
+             ADD sr_return_quantity (any) OPT ANY
+             ADD sr_return_amt (any) OPT ANY
+             ADD sr_return_tax (any) OPT ANY
+             ADD sr_return_amt_inc_tax (any) OPT ANY
+             ADD sr_fee (any) OPT ANY
+             ADD sr_return_ship_cost (any) OPT ANY
+             ADD sr_refunded_cash (any) OPT ANY
+             ADD sr_reversed_charge (any) OPT ANY
+             ADD sr_store_credit (any) OPT ANY
+             ADD sr_net_loss (any) OPT ANY
+        )
+        OUTPUTLIST (sr_addr_sk, sr_cdemo_sk, sr_customer_sk, sr_fee, sr_hdemo_sk, sr_item_sk, sr_net_loss, sr_reason_sk, sr_refunded_cash, sr_return_amt, sr_return_amt_inc_tax, sr_return_quantity, sr_return_ship_cost, sr_return_tax, sr_return_time_sk, sr_returned_date_sk, sr_reversed_charge, sr_store_credit, sr_store_sk, sr_ticket_number
+        )
+        WRAPPER (jdbc bv_gic_store_returns)
+    )
+    ATSOURCE_THROUGH_VDP_ONLY;
+

@@ -1,0 +1,8 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE DF ds_sol_man_logs
+    ROUTE LOCAL 'LocalConnection' '${databases.denodo_training.datasources.df.ds_sol_man_logs.ROUTE.LOCAL.PATH}'
+    COLUMNDELIMITER = '\t'
+    ENDOFLINEDELIMITER = '\n'
+    BEGINDELIMITER = 'ServerName'
+    HEADER = TRUE;
+

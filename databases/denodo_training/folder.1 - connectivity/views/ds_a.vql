@@ -1,0 +1,29 @@
+﻿CREATE OR REPLACE WRAPPER DF ds_a
+    FOLDER = '/1 - connectivity'
+    DATASOURCENAME=ds_a
+    OUTPUTSCHEMA (
+        "Column0" = 'Column0' (OPT),
+        "Column1" = 'Column1' (OPT),
+        "Column2" = 'Column2' (OPT)
+    );
+
+CREATE OR REPLACE TABLE ds_a I18N au_cst (
+        "Column0":text,
+        "Column1":text,
+        "Column2":text
+    )
+    FOLDER = '/1 - connectivity'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD ds_a(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD "Column0" (any) OPT ANY
+             ADD "Column1" (any) OPT ANY
+             ADD "Column2" (any) OPT ANY
+        )
+        OUTPUTLIST ("Column0", "Column1", "Column2"
+        )
+        WRAPPER (df ds_a)
+    );
+
