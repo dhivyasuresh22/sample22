@@ -1,0 +1,8 @@
+Cluster_School,Year,General,total
+NBS,2022,Number of .xlsxxxxx,184
+NBS,2022,Number of .xlsx,31
+NBS,2022,Number of .xlsx,189
+NBS,2022,Number of .xlsx,45
+NBS,2022,Number of .xlsx,6865
+NBS,2022,Number of .xlsx,1596
+NBS,2022,Number of .xlsx,21
