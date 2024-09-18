@@ -1,0 +1,2 @@
+﻿CREATE OR REPLACE VIEW dv_test_renamed AS SELECT 'test1' AS test_text, current_date() AS today FROM dual() CONTEXT ('I18N' = 'au_cst');
+
