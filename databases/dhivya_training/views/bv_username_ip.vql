@@ -1,0 +1,21 @@
+﻿CREATE OR REPLACE WRAPPER DF bv_username_ip
+    DATASOURCENAME=ds_username_ip
+    OUTPUTSCHEMA (
+        descr = 'descr' (OPT)
+    );
+
+CREATE OR REPLACE TABLE bv_username_ip I18N au_cst (
+        descr:text
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_username_ip(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD descr (any) OPT ANY
+        )
+        OUTPUTLIST (descr
+        )
+        WRAPPER (df bv_username_ip)
+    );
+

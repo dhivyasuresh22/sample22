@@ -1,0 +1,19 @@
+﻿CREATE OR REPLACE VQL PROCEDURE sp_alma_cursor
+(IsFinished OUT VARCHAR, Column0 OUT VARCHAR, Column2 OUT VARCHAR, Column3 OUT VARCHAR, Column4 OUT VARCHAR, Column5 OUT VARCHAR, Column6 OUT VARCHAR, Column1 OUT VARCHAR)
+AS (
+    CURSOR cursordata IS 'SELECT * from flatten_bv_nth_alma_xml';
+    varname1 cursordata%ROWTYPE;
+)
+BEGIN
+    OPEN cursordata;
+    LOOP 
+        FETCH cursordata INTO varname1;
+        IF varname1."IsFinished" = 'false' THEN 
+                RETURN ROW ( IsFinished, Column0, Column2, Column3, Column4, Column5, Column6, Column1) VALUES (varname1.IsFinished, varname1.Column0, varname1.Column2, varname1.Column3, varname1.Column4, varname1.Column5, varname1.Column6, varname1.Column1);
+            END IF; 
+        EXIT WHEN cursordata%NOTFOUND;
+    END LOOP;
+    CLOSE cursordata;
+
+END;
+

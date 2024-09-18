@@ -1,0 +1,432 @@
+﻿CREATE OR REPLACE WRAPPER JSON bv_json_ich
+    DATASOURCENAME=ds_json_ich
+    TUPLEROOT '/JSONFile'
+    OUTPUTSCHEMA ("JSONFile" = 'JSONFile' : REGISTER OF (
+        took = 'took' : 'java.lang.Integer',
+        timed_out = 'timed_out' : 'java.lang.String',
+        _shards = '_shards' : REGISTER OF (
+            total = 'total' : 'java.lang.Integer',
+            successful = 'successful' : 'java.lang.Integer',
+            skipped = 'skipped' : 'java.lang.Integer',
+            failed = 'failed' : 'java.lang.Integer'
+        ),
+        hits = 'hits' : REGISTER OF (
+            total = 'total' : REGISTER OF (
+                value = 'value' : 'java.lang.Integer',
+                relation = 'relation' : 'java.lang.String'
+            ),
+            max_score = 'max_score' : 'java.lang.String',
+            hits = 'hits' : ARRAY OF (
+                hits = 'hits' : REGISTER OF (
+                    _index = '_index' : 'java.lang.String',
+                    _id = '_id' : 'java.lang.String',
+                    _score = '_score' : 'java.lang.String',
+                    _source = '_source' : REGISTER OF (
+                        "ufKey" = 'ufKey' : 'java.lang.String',
+                        document_type = 'document_type' : 'java.lang.String',
+                        "movementKeys" = 'movementKeys' : ARRAY OF (
+                            "movementKeys" = 'movementKeys' : REGISTER OF (
+                                "snsKey" = 'snsKey' : 'java.lang.String',
+                                "ufKey" = 'ufKey' : 'java.lang.String',
+                                "ufmKey" = 'ufmKey' : 'java.lang.String',
+                                uin = 'uin' : 'java.lang.String',
+                                fin = 'fin' : 'java.lang.String',
+                                mid = 'mid' : 'java.lang.String',
+                                "idType" = 'idType' : 'java.lang.String',
+                                "idTypeDescription" = 'idTypeDescription' : 'java.lang.String',
+                                version = 'version' : 'java.lang.String',
+                                "createdBy" = 'createdBy' : 'java.lang.String',
+                                "createdOnDatetime" = 'createdOnDatetime' : 'java.lang.String',
+                                "updatedBy" = 'updatedBy' : 'java.lang.String',
+                                "updatedOnDatetime" = 'updatedOnDatetime' : 'java.lang.String',
+                                "createdOnTimestamp" = 'createdOnTimestamp' : 'java.lang.Long',
+                                "updatedOnTimestamp" = 'updatedOnTimestamp' : 'java.lang.Long',
+                                "oldMid" = 'oldMid' : 'java.lang.String'
+                            )
+                        ),
+                        details = 'details' : ARRAY OF (
+                            details = 'details' : REGISTER OF (
+                                "requestingDepartment" = 'requestingDepartment' : 'java.lang.String',
+                                "requestingDepartmentDescription" = 'requestingDepartmentDescription' : 'java.lang.String',
+                                "blacklistId" = 'blacklistId' : 'java.lang.String',
+                                "blacklistType" = 'blacklistType' : 'java.lang.String',
+                                "blacklistTypeDescription" = 'blacklistTypeDescription' : 'java.lang.String',
+                                "checkpointCode" = 'checkpointCode' : 'java.lang.String',
+                                "checkpointCodeDescription" = 'checkpointCodeDescription' : 'java.lang.String',
+                                "hitInstructions" = 'hitInstructions' : 'java.lang.String',
+                                "sourceSystem" = 'sourceSystem' : 'java.lang.String',
+                                "sourceSystemDescription" = 'sourceSystemDescription' : 'java.lang.String',
+                                status = 'status' : 'java.lang.String',
+                                version = 'version' : 'java.lang.String',
+                                "createdBy" = 'createdBy' : 'java.lang.String',
+                                "createdOnDatetime" = 'createdOnDatetime' : 'java.lang.String',
+                                "updatedOnDatetime" = 'updatedOnDatetime' : 'java.lang.String',
+                                "createdOnTimestamp" = 'createdOnTimestamp' : 'java.lang.Long',
+                                "updatedOnTimestamp" = 'updatedOnTimestamp' : 'java.lang.Long',
+                                "updatedBy" = 'updatedBy' : 'java.lang.String'
+                            )
+                        ),
+                        schedules = 'schedules' : ARRAY OF (
+                            schedules = 'schedules' : REGISTER OF (
+                                "requestingDepartment" = 'requestingDepartment' : 'java.lang.String',
+                                "arrivalOrDepartureIndicator" = 'arrivalOrDepartureIndicator' : 'java.lang.String',
+                                "fileReferenceNo" = 'fileReferenceNo' : 'java.lang.String',
+                                "checkpointString" = 'checkpointString' : 'java.lang.String',
+                                "motString" = 'motString' : 'java.lang.String',
+                                "blacklistedDaysOfWeek" = 'blacklistedDaysOfWeek' : 'java.lang.String',
+                                "blacklistedTimeOfDay" = 'blacklistedTimeOfDay' : 'java.lang.String',
+                                "effectiveDateString" = 'effectiveDateString' : 'java.lang.String',
+                                "expiryDateString" = 'expiryDateString' : 'java.lang.String',
+                                "effectiveDate" = 'effectiveDate' : 'java.lang.Long',
+                                "expiryDate" = 'expiryDate' : 'java.lang.Long',
+                                "priorityCode" = 'priorityCode' : 'java.lang.String',
+                                "hitActionCode" = 'hitActionCode' : 'java.lang.String',
+                                "hitActionCodeDescription" = 'hitActionCodeDescription' : 'java.lang.String',
+                                "nflCauseCode" = 'nflCauseCode' : 'java.lang.String',
+                                "deactivationReason" = 'deactivationReason' : 'java.lang.String',
+                                "blacklistStatus" = 'blacklistStatus' : 'java.lang.String',
+                                version = 'version' : 'java.lang.String',
+                                "createdBy" = 'createdBy' : 'java.lang.String',
+                                "createdOnDatetime" = 'createdOnDatetime' : 'java.lang.String',
+                                "updatedOnDatetime" = 'updatedOnDatetime' : 'java.lang.String',
+                                "activatedOrDeactivatedBy" = 'activatedOrDeactivatedBy' : 'java.lang.String',
+                                "activatedOrDeactivatedOn" = 'activatedOrDeactivatedOn' : 'java.lang.String',
+                                "createdOnTimestamp" = 'createdOnTimestamp' : 'java.lang.Long',
+                                "updatedOnTimestamp" = 'updatedOnTimestamp' : 'java.lang.Long',
+                                "updatedBy" = 'updatedBy' : 'java.lang.String'
+                            )
+                        ),
+                        "metaData" = 'metaData' : REGISTER OF (
+                            "runId" = 'runId' : 'java.lang.String',
+                            "currentRunTime" = 'currentRunTime' : 'java.lang.String',
+                            "runHash" = 'runHash' : 'java.lang.String'
+                        ),
+                        "personParticulars" = 'personParticulars' : ARRAY OF (
+                            "personParticulars" = 'personParticulars' : REGISTER OF (
+                                "nameType" = 'nameType' : 'java.lang.String',
+                                name = 'name' : 'java.lang.String',
+                                "parsedName" = 'parsedName' : ARRAY OF (
+                                    "parsedName" = 'parsedName' : REGISTER OF (
+                                        "nodeId" = 'nodeId' : 'java.lang.Integer',
+                                        "nameDisplay" = 'nameDisplay' : 'java.lang.String',
+                                        surname = 'surname' : 'java.lang.String',
+                                        titles = 'titles' : ARRAY OF (
+                                            titles = 'titles' : REGISTER OF (
+                                                field_0 = 'field_0' : 'java.lang.String'
+                                            )
+                                        ),
+                                        suffixes = 'suffixes' : ARRAY OF (
+                                            suffixes = 'suffixes' : REGISTER OF (
+                                                field_0 = 'field_0' : 'java.lang.String'
+                                            )
+                                        ),
+                                        forename = 'forename' : 'java.lang.String',
+                                        initial = 'initial' : 'java.lang.String',
+                                        middlename = 'middlename' : 'java.lang.String'
+                                    )
+                                ),
+                                gender = 'gender' : 'java.lang.String',
+                                "dateOfBirthString" = 'dateOfBirthString' : 'java.lang.String',
+                                "dateOfBirth" = 'dateOfBirth' : 'java.lang.Long',
+                                "dateOfBirthParts" = 'dateOfBirthParts' : REGISTER OF (
+                                    date = 'date' : 'java.lang.Long',
+                                    year = 'year' : 'java.lang.String',
+                                    month = 'month' : 'java.lang.String',
+                                    day = 'day' : 'java.lang.String'
+                                ),
+                                "nationalityCode" = 'nationalityCode' : 'java.lang.String',
+                                "travelDocumentNumber" = 'travelDocumentNumber' : 'java.lang.String',
+                                version = 'version' : 'java.lang.String',
+                                "createdOnDatetime" = 'createdOnDatetime' : 'java.lang.String',
+                                "updatedOnDatetime" = 'updatedOnDatetime' : 'java.lang.String',
+                                "createdOnTimestamp" = 'createdOnTimestamp' : 'java.lang.Long',
+                                "updatedOnTimestamp" = 'updatedOnTimestamp' : 'java.lang.Long',
+                                gnm = 'gnm' : REGISTER OF (
+                                    "gnmThreshold" = 'gnmThreshold' : 'java.lang.String',
+                                    "gnmNameList" = 'gnmNameList' : ARRAY OF (
+                                        "gnmNameList" = 'gnmNameList' : REGISTER OF (
+                                            field_0 = 'field_0' : 'java.lang.String'
+                                        )
+                                    )
+                                ),
+                                "particularsSubRecord" = 'particularsSubRecord' : REGISTER OF (
+                                    name = 'name' : ARRAY OF (
+                                        name = 'name' : REGISTER OF (
+                                            field_0 = 'field_0' : 'java.lang.String'
+                                        )
+                                    ),
+                                    gender = 'gender' : 'java.lang.String',
+                                    "dateOfBirthString" = 'dateOfBirthString' : 'java.lang.String',
+                                    "dateOfBirth" = 'dateOfBirth' : 'java.lang.Long',
+                                    "nationalityCode" = 'nationalityCode' : 'java.lang.String',
+                                    "travelDocumentNumber" = 'travelDocumentNumber' : 'java.lang.String',
+                                    "updatedOnDate" = 'updatedOnDate' : 'java.lang.String',
+                                    "createdOnDate" = 'createdOnDate' : 'java.lang.String'
+                                ),
+                                "createdBy" = 'createdBy' : 'java.lang.String',
+                                "updatedBy" = 'updatedBy' : 'java.lang.String'
+                            )
+                        ),
+                        run_id = 'run_id' : 'java.lang.String',
+                        _records = '_records' : ARRAY OF (
+                            _records = '_records' : REGISTER OF (
+                                path = 'path' : 'java.lang.String',
+                                "offset" = 'offset' : 'java.lang.Integer',
+                                records = 'records' : ARRAY OF (
+                                    records = 'records' : REGISTER OF (
+                                        id = 'id' : 'java.lang.String',
+                                        "entityType" = 'entityType' : 'java.lang.String'
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    sort = 'sort' : ARRAY OF (
+                        sort = 'sort' : REGISTER OF (
+                            field_0 = 'field_0' : 'java.math.BigInteger'
+                        )
+                    )
+                )
+            )
+        )
+    )
+    );
+
+CREATE OR REPLACE TYPE ds_json_ich__shards AS REGISTER OF (total:int, successful:int, skipped:int, failed:int);
+
+CREATE OR REPLACE TYPE ds_json_ich_hits_total AS REGISTER OF (value:int, relation:text);
+
+CREATE OR REPLACE TYPE "ds_json_ich_hits_hits_hits__source_movementKeys_movementKeys" AS REGISTER OF ("snsKey":text, "ufKey":text, "ufmKey":text, uin:text, fin:text, mid:text, "idType":text, "idTypeDescription":text, version:text, "createdBy":text, "createdOnDatetime":text, "updatedBy":text, "updatedOnDatetime":text, "createdOnTimestamp":long, "updatedOnTimestamp":long, "oldMid":text);
+
+CREATE OR REPLACE TYPE "ds_json_ich_hits_hits_hits__source_movementKeys" AS ARRAY OF "ds_json_ich_hits_hits_hits__source_movementKeys_movementKeys";
+
+CREATE OR REPLACE TYPE ds_json_ich_hits_hits_hits__source_details_details AS REGISTER OF ("requestingDepartment":text, "requestingDepartmentDescription":text, "blacklistId":text, "blacklistType":text, "blacklistTypeDescription":text, "checkpointCode":text, "checkpointCodeDescription":text, "hitInstructions":text, "sourceSystem":text, "sourceSystemDescription":text, status:text, version:text, "createdBy":text, "createdOnDatetime":text, "updatedOnDatetime":text, "createdOnTimestamp":long, "updatedOnTimestamp":long, "updatedBy":text);
+
+CREATE OR REPLACE TYPE ds_json_ich_hits_hits_hits__source_details AS ARRAY OF ds_json_ich_hits_hits_hits__source_details_details;
+
+CREATE OR REPLACE TYPE ds_json_ich_hits_hits_hits__source_schedules_schedules AS REGISTER OF ("requestingDepartment":text, "arrivalOrDepartureIndicator":text, "fileReferenceNo":text, "checkpointString":text, "motString":text, "blacklistedDaysOfWeek":text, "blacklistedTimeOfDay":text, "effectiveDateString":text, "expiryDateString":text, "effectiveDate":long, "expiryDate":long, "priorityCode":text, "hitActionCode":text, "hitActionCodeDescription":text, "nflCauseCode":text, "deactivationReason":text, "blacklistStatus":text, version:text, "createdBy":text, "createdOnDatetime":text, "updatedOnDatetime":text, "activatedOrDeactivatedBy":text, "activatedOrDeactivatedOn":text, "createdOnTimestamp":long, "updatedOnTimestamp":long, "updatedBy":text);
+
+CREATE OR REPLACE TYPE ds_json_ich_hits_hits_hits__source_schedules AS ARRAY OF ds_json_ich_hits_hits_hits__source_schedules_schedules;
+
+CREATE OR REPLACE TYPE "ds_json_ich_hits_hits_hits__source_metaData" AS REGISTER OF ("runId":text, "currentRunTime":text, "runHash":text);
+
+CREATE OR REPLACE TYPE "ds_json_ich_hits_hits_hits__source_personParticulars_personParticulars_parsedName_parsedName_title_0" AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE "ds_json_ich_hits_hits_hits__source_personParticulars_personParticulars_parsedName_parsedName_titles" AS ARRAY OF "ds_json_ich_hits_hits_hits__source_personParticulars_personParticulars_parsedName_parsedName_title_0";
+
+CREATE OR REPLACE TYPE "ds_json_ich_hits_hits_hits__source_personParticulars_personParticulars_parsedName_parsedName_suffi_1" AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE "ds_json_ich_hits_hits_hits__source_personParticulars_personParticulars_parsedName_parsedName_suffi_0" AS ARRAY OF "ds_json_ich_hits_hits_hits__source_personParticulars_personParticulars_parsedName_parsedName_suffi_1";
+
+CREATE OR REPLACE TYPE "ds_json_ich_hits_hits_hits__source_personParticulars_personParticulars_parsedName_parsedName" AS REGISTER OF ("nodeId":int, "nameDisplay":text, surname:text, titles:"ds_json_ich_hits_hits_hits__source_personParticulars_personParticulars_parsedName_parsedName_titles", suffixes:"ds_json_ich_hits_hits_hits__source_personParticulars_personParticulars_parsedName_parsedName_suffi_0", forename:text, initial:text, middlename:text);
+
+CREATE OR REPLACE TYPE "ds_json_ich_hits_hits_hits__source_personParticulars_personParticulars_parsedName" AS ARRAY OF "ds_json_ich_hits_hits_hits__source_personParticulars_personParticulars_parsedName_parsedName";
+
+CREATE OR REPLACE TYPE "ds_json_ich_hits_hits_hits__source_personParticulars_personParticulars_dateOfBirthParts" AS REGISTER OF (date:long, year:text, month:text, day:text);
+
+CREATE OR REPLACE TYPE "ds_json_ich_hits_hits_hits__source_personParticulars_personParticulars_gnm_gnmNameList_gnmNameList" AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE "ds_json_ich_hits_hits_hits__source_personParticulars_personParticulars_gnm_gnmNameList" AS ARRAY OF "ds_json_ich_hits_hits_hits__source_personParticulars_personParticulars_gnm_gnmNameList_gnmNameList";
+
+CREATE OR REPLACE TYPE "ds_json_ich_hits_hits_hits__source_personParticulars_personParticulars_gnm" AS REGISTER OF ("gnmThreshold":text, "gnmNameList":"ds_json_ich_hits_hits_hits__source_personParticulars_personParticulars_gnm_gnmNameList");
+
+CREATE OR REPLACE TYPE "ds_json_ich_hits_hits_hits__source_personParticulars_personParticulars_particularsSubRecord_name_n_0" AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE "ds_json_ich_hits_hits_hits__source_personParticulars_personParticulars_particularsSubRecord_name" AS ARRAY OF "ds_json_ich_hits_hits_hits__source_personParticulars_personParticulars_particularsSubRecord_name_n_0";
+
+CREATE OR REPLACE TYPE "ds_json_ich_hits_hits_hits__source_personParticulars_personParticulars_particularsSubRecord" AS REGISTER OF (name:"ds_json_ich_hits_hits_hits__source_personParticulars_personParticulars_particularsSubRecord_name", gender:text, "dateOfBirthString":text, "dateOfBirth":long, "nationalityCode":text, "travelDocumentNumber":text, "updatedOnDate":text, "createdOnDate":text);
+
+CREATE OR REPLACE TYPE "ds_json_ich_hits_hits_hits__source_personParticulars_personParticulars" AS REGISTER OF ("nameType":text, name:text, "parsedName":"ds_json_ich_hits_hits_hits__source_personParticulars_personParticulars_parsedName", gender:text, "dateOfBirthString":text, "dateOfBirth":long, "dateOfBirthParts":"ds_json_ich_hits_hits_hits__source_personParticulars_personParticulars_dateOfBirthParts", "nationalityCode":text, "travelDocumentNumber":text, version:text, "createdOnDatetime":text, "updatedOnDatetime":text, "createdOnTimestamp":long, "updatedOnTimestamp":long, gnm:"ds_json_ich_hits_hits_hits__source_personParticulars_personParticulars_gnm", "particularsSubRecord":"ds_json_ich_hits_hits_hits__source_personParticulars_personParticulars_particularsSubRecord", "createdBy":text, "updatedBy":text);
+
+CREATE OR REPLACE TYPE "ds_json_ich_hits_hits_hits__source_personParticulars" AS ARRAY OF "ds_json_ich_hits_hits_hits__source_personParticulars_personParticulars";
+
+CREATE OR REPLACE TYPE ds_json_ich_hits_hits_hits__source__records__records_records_records AS REGISTER OF (id:text, "entityType":text);
+
+CREATE OR REPLACE TYPE ds_json_ich_hits_hits_hits__source__records__records_records AS ARRAY OF ds_json_ich_hits_hits_hits__source__records__records_records_records;
+
+CREATE OR REPLACE TYPE ds_json_ich_hits_hits_hits__source__records__records AS REGISTER OF (path:text, "offset":int, records:ds_json_ich_hits_hits_hits__source__records__records_records);
+
+CREATE OR REPLACE TYPE ds_json_ich_hits_hits_hits__source__records AS ARRAY OF ds_json_ich_hits_hits_hits__source__records__records;
+
+CREATE OR REPLACE TYPE ds_json_ich_hits_hits_hits__source AS REGISTER OF ("ufKey":text, document_type:text, "movementKeys":"ds_json_ich_hits_hits_hits__source_movementKeys", details:ds_json_ich_hits_hits_hits__source_details, schedules:ds_json_ich_hits_hits_hits__source_schedules, "metaData":"ds_json_ich_hits_hits_hits__source_metaData", "personParticulars":"ds_json_ich_hits_hits_hits__source_personParticulars", run_id:text, _records:ds_json_ich_hits_hits_hits__source__records);
+
+CREATE OR REPLACE TYPE ds_json_ich_hits_hits_hits_sort_sort AS REGISTER OF (field_0:decimal);
+
+CREATE OR REPLACE TYPE ds_json_ich_hits_hits_hits_sort AS ARRAY OF ds_json_ich_hits_hits_hits_sort_sort;
+
+CREATE OR REPLACE TYPE ds_json_ich_hits_hits_hits AS REGISTER OF (_index:text, _id:text, _score:text, _source:ds_json_ich_hits_hits_hits__source, sort:ds_json_ich_hits_hits_hits_sort);
+
+CREATE OR REPLACE TYPE ds_json_ich_hits_hits AS ARRAY OF ds_json_ich_hits_hits_hits;
+
+CREATE OR REPLACE TYPE ds_json_ich_hits AS REGISTER OF (total:ds_json_ich_hits_total, max_score:text, hits:ds_json_ich_hits_hits);
+
+CREATE OR REPLACE TABLE bv_json_ich I18N au_cst (
+        took:int,
+        timed_out:text,
+        _shards:ds_json_ich__shards,
+        hits:ds_json_ich_hits
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_json_ich(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD took NOS ZERO ()
+             ADD timed_out NOS ZERO ()
+             ADD _shards NOS ZERO ()
+             ADD _shards.total NOS ZERO ()
+             ADD _shards.successful NOS ZERO ()
+             ADD _shards.skipped NOS ZERO ()
+             ADD _shards.failed NOS ZERO ()
+             ADD hits NOS ZERO ()
+             ADD hits.total NOS ZERO ()
+             ADD hits.total.value NOS ZERO ()
+             ADD hits.total.relation NOS ZERO ()
+             ADD hits.max_score NOS ZERO ()
+             ADD hits.hits NOS ZERO ()
+             ADD hits.hits NOS ZERO ()
+             ADD hits.hits._index NOS ZERO ()
+             ADD hits.hits._id NOS ZERO ()
+             ADD hits.hits._score NOS ZERO ()
+             ADD hits.hits._source NOS ZERO ()
+             ADD hits.hits._source."ufKey" NOS ZERO ()
+             ADD hits.hits._source.document_type NOS ZERO ()
+             ADD hits.hits._source."movementKeys" NOS ZERO ()
+             ADD hits.hits._source."movementKeys" NOS ZERO ()
+             ADD hits.hits._source."movementKeys"."snsKey" NOS ZERO ()
+             ADD hits.hits._source."movementKeys"."ufKey" NOS ZERO ()
+             ADD hits.hits._source."movementKeys"."ufmKey" NOS ZERO ()
+             ADD hits.hits._source."movementKeys".uin NOS ZERO ()
+             ADD hits.hits._source."movementKeys".fin NOS ZERO ()
+             ADD hits.hits._source."movementKeys".mid NOS ZERO ()
+             ADD hits.hits._source."movementKeys"."idType" NOS ZERO ()
+             ADD hits.hits._source."movementKeys"."idTypeDescription" NOS ZERO ()
+             ADD hits.hits._source."movementKeys".version NOS ZERO ()
+             ADD hits.hits._source."movementKeys"."createdBy" NOS ZERO ()
+             ADD hits.hits._source."movementKeys"."createdOnDatetime" NOS ZERO ()
+             ADD hits.hits._source."movementKeys"."updatedBy" NOS ZERO ()
+             ADD hits.hits._source."movementKeys"."updatedOnDatetime" NOS ZERO ()
+             ADD hits.hits._source."movementKeys"."createdOnTimestamp" NOS ZERO ()
+             ADD hits.hits._source."movementKeys"."updatedOnTimestamp" NOS ZERO ()
+             ADD hits.hits._source."movementKeys"."oldMid" NOS ZERO ()
+             ADD hits.hits._source.details NOS ZERO ()
+             ADD hits.hits._source.details NOS ZERO ()
+             ADD hits.hits._source.details."requestingDepartment" NOS ZERO ()
+             ADD hits.hits._source.details."requestingDepartmentDescription" NOS ZERO ()
+             ADD hits.hits._source.details."blacklistId" NOS ZERO ()
+             ADD hits.hits._source.details."blacklistType" NOS ZERO ()
+             ADD hits.hits._source.details."blacklistTypeDescription" NOS ZERO ()
+             ADD hits.hits._source.details."checkpointCode" NOS ZERO ()
+             ADD hits.hits._source.details."checkpointCodeDescription" NOS ZERO ()
+             ADD hits.hits._source.details."hitInstructions" NOS ZERO ()
+             ADD hits.hits._source.details."sourceSystem" NOS ZERO ()
+             ADD hits.hits._source.details."sourceSystemDescription" NOS ZERO ()
+             ADD hits.hits._source.details.status NOS ZERO ()
+             ADD hits.hits._source.details.version NOS ZERO ()
+             ADD hits.hits._source.details."createdBy" NOS ZERO ()
+             ADD hits.hits._source.details."createdOnDatetime" NOS ZERO ()
+             ADD hits.hits._source.details."updatedOnDatetime" NOS ZERO ()
+             ADD hits.hits._source.details."createdOnTimestamp" NOS ZERO ()
+             ADD hits.hits._source.details."updatedOnTimestamp" NOS ZERO ()
+             ADD hits.hits._source.details."updatedBy" NOS ZERO ()
+             ADD hits.hits._source.schedules NOS ZERO ()
+             ADD hits.hits._source.schedules NOS ZERO ()
+             ADD hits.hits._source.schedules."requestingDepartment" NOS ZERO ()
+             ADD hits.hits._source.schedules."arrivalOrDepartureIndicator" NOS ZERO ()
+             ADD hits.hits._source.schedules."fileReferenceNo" NOS ZERO ()
+             ADD hits.hits._source.schedules."checkpointString" NOS ZERO ()
+             ADD hits.hits._source.schedules."motString" NOS ZERO ()
+             ADD hits.hits._source.schedules."blacklistedDaysOfWeek" NOS ZERO ()
+             ADD hits.hits._source.schedules."blacklistedTimeOfDay" NOS ZERO ()
+             ADD hits.hits._source.schedules."effectiveDateString" NOS ZERO ()
+             ADD hits.hits._source.schedules."expiryDateString" NOS ZERO ()
+             ADD hits.hits._source.schedules."effectiveDate" NOS ZERO ()
+             ADD hits.hits._source.schedules."expiryDate" NOS ZERO ()
+             ADD hits.hits._source.schedules."priorityCode" NOS ZERO ()
+             ADD hits.hits._source.schedules."hitActionCode" NOS ZERO ()
+             ADD hits.hits._source.schedules."hitActionCodeDescription" NOS ZERO ()
+             ADD hits.hits._source.schedules."nflCauseCode" NOS ZERO ()
+             ADD hits.hits._source.schedules."deactivationReason" NOS ZERO ()
+             ADD hits.hits._source.schedules."blacklistStatus" NOS ZERO ()
+             ADD hits.hits._source.schedules.version NOS ZERO ()
+             ADD hits.hits._source.schedules."createdBy" NOS ZERO ()
+             ADD hits.hits._source.schedules."createdOnDatetime" NOS ZERO ()
+             ADD hits.hits._source.schedules."updatedOnDatetime" NOS ZERO ()
+             ADD hits.hits._source.schedules."activatedOrDeactivatedBy" NOS ZERO ()
+             ADD hits.hits._source.schedules."activatedOrDeactivatedOn" NOS ZERO ()
+             ADD hits.hits._source.schedules."createdOnTimestamp" NOS ZERO ()
+             ADD hits.hits._source.schedules."updatedOnTimestamp" NOS ZERO ()
+             ADD hits.hits._source.schedules."updatedBy" NOS ZERO ()
+             ADD hits.hits._source."metaData" NOS ZERO ()
+             ADD hits.hits._source."metaData"."runId" NOS ZERO ()
+             ADD hits.hits._source."metaData"."currentRunTime" NOS ZERO ()
+             ADD hits.hits._source."metaData"."runHash" NOS ZERO ()
+             ADD hits.hits._source."personParticulars" NOS ZERO ()
+             ADD hits.hits._source."personParticulars" NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."nameType" NOS ZERO ()
+             ADD hits.hits._source."personParticulars".name NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."parsedName" NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."parsedName" NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."parsedName"."nodeId" NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."parsedName"."nameDisplay" NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."parsedName".surname NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."parsedName".titles NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."parsedName".titles NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."parsedName".titles.field_0 NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."parsedName".suffixes NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."parsedName".suffixes NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."parsedName".suffixes.field_0 NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."parsedName".forename NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."parsedName".initial NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."parsedName".middlename NOS ZERO ()
+             ADD hits.hits._source."personParticulars".gender NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."dateOfBirthString" NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."dateOfBirth" NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."dateOfBirthParts" NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."dateOfBirthParts".date NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."dateOfBirthParts".year NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."dateOfBirthParts".month NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."dateOfBirthParts".day NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."nationalityCode" NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."travelDocumentNumber" NOS ZERO ()
+             ADD hits.hits._source."personParticulars".version NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."createdOnDatetime" NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."updatedOnDatetime" NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."createdOnTimestamp" NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."updatedOnTimestamp" NOS ZERO ()
+             ADD hits.hits._source."personParticulars".gnm NOS ZERO ()
+             ADD hits.hits._source."personParticulars".gnm."gnmThreshold" NOS ZERO ()
+             ADD hits.hits._source."personParticulars".gnm."gnmNameList" NOS ZERO ()
+             ADD hits.hits._source."personParticulars".gnm."gnmNameList" NOS ZERO ()
+             ADD hits.hits._source."personParticulars".gnm."gnmNameList".field_0 NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."particularsSubRecord" NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."particularsSubRecord".name NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."particularsSubRecord".name NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."particularsSubRecord".name.field_0 NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."particularsSubRecord".gender NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."particularsSubRecord"."dateOfBirthString" NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."particularsSubRecord"."dateOfBirth" NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."particularsSubRecord"."nationalityCode" NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."particularsSubRecord"."travelDocumentNumber" NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."particularsSubRecord"."updatedOnDate" NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."particularsSubRecord"."createdOnDate" NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."createdBy" NOS ZERO ()
+             ADD hits.hits._source."personParticulars"."updatedBy" NOS ZERO ()
+             ADD hits.hits._source.run_id NOS ZERO ()
+             ADD hits.hits._source._records NOS ZERO ()
+             ADD hits.hits._source._records NOS ZERO ()
+             ADD hits.hits._source._records.path NOS ZERO ()
+             ADD hits.hits._source._records."offset" NOS ZERO ()
+             ADD hits.hits._source._records.records NOS ZERO ()
+             ADD hits.hits._source._records.records NOS ZERO ()
+             ADD hits.hits._source._records.records.id NOS ZERO ()
+             ADD hits.hits._source._records.records."entityType" NOS ZERO ()
+             ADD hits.hits.sort NOS ZERO ()
+             ADD hits.hits.sort NOS ZERO ()
+             ADD hits.hits.sort.field_0 NOS ZERO ()
+        )
+        OUTPUTLIST (_shards, hits, timed_out, took
+        )
+        WRAPPER (json bv_json_ich)
+    );
+

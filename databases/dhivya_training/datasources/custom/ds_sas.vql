@@ -1,0 +1,4 @@
+﻿CREATE OR REPLACE DATASOURCE CUSTOM ds_sas
+    CLASSNAME='com.denodo.connect.sas.sas7bdat.wrapper.Sas7bdatWrapper'
+    JARS 'denodo-sas-customwrapper';
+

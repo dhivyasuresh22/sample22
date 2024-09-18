@@ -1,0 +1,64 @@
+﻿CREATE OR REPLACE WRAPPER XML bv_nth_alma_xml
+    FOLDER = '/sp-nth-5482-24-47'
+    DATASOURCENAME=nth_alma_xml
+    TUPLEROOT 'report'
+    OUTPUTSCHEMA (report = 'report' : REGISTER OF (
+        "QueryResult" = 'QueryResult' : REGISTER OF (
+            "IsFinished" = 'IsFinished' : 'java.lang.Boolean',
+            "ResultXml" = 'ResultXml' : REGISTER OF (
+                rowset = 'rowset' : REGISTER OF (
+                    "Row" = 'Row' : ARRAY OF (
+                        "Row" = 'Row' : REGISTER OF (
+                            "Column0" = 'Column0' : 'java.lang.Short',
+                            "Column2" = 'Column2' : 'java.lang.String',
+                            "Column3" = 'Column3' : 'java.lang.Short',
+                            "Column4" = 'Column4' : 'java.lang.String',
+                            "Column5" = 'Column5' : 'java.lang.String',
+                            "Column6" = 'Column6' : 'java.time.LocalDateTime',
+                            "Column1" = 'Column1' : 'java.lang.String'
+                        )
+                    )
+                )
+            )
+        )
+    )
+    );
+
+CREATE OR REPLACE TYPE "nth_alma_xml_QueryResult_ResultXml_rowset_Row_Row" AS REGISTER OF ("Column0":int, "Column2":text, "Column3":int, "Column4":text, "Column5":text, "Column6":timestamp, "Column1":text);
+
+CREATE OR REPLACE TYPE "nth_alma_xml_QueryResult_ResultXml_rowset_Row" AS ARRAY OF "nth_alma_xml_QueryResult_ResultXml_rowset_Row_Row";
+
+CREATE OR REPLACE TYPE "nth_alma_xml_QueryResult_ResultXml_rowset" AS REGISTER OF ("Row":"nth_alma_xml_QueryResult_ResultXml_rowset_Row");
+
+CREATE OR REPLACE TYPE "nth_alma_xml_QueryResult_ResultXml" AS REGISTER OF (rowset:"nth_alma_xml_QueryResult_ResultXml_rowset");
+
+CREATE OR REPLACE TYPE "nth_alma_xml_QueryResult" AS REGISTER OF ("IsFinished":boolean, "ResultXml":"nth_alma_xml_QueryResult_ResultXml");
+
+CREATE OR REPLACE TABLE bv_nth_alma_xml I18N au_cst (
+        "QueryResult":"nth_alma_xml_QueryResult"
+    )
+    FOLDER = '/sp-nth-5482-24-47'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_nth_alma_xml(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD "QueryResult" NOS ZERO ()
+             ADD "QueryResult"."IsFinished" NOS ZERO ()
+             ADD "QueryResult"."ResultXml" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column0" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column2" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column3" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column4" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column5" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column6" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column1" NOS ZERO ()
+        )
+        OUTPUTLIST ("QueryResult"
+        )
+        WRAPPER (xml bv_nth_alma_xml)
+    );
+

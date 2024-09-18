@@ -1,0 +1,60 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER XML bv_alma
+    DATASOURCENAME=ds_alma
+    TUPLEROOT 'report'
+    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' GET '${databases.dhivya_training.views.xml.bv_alma.ROUTE.HTTP.URL}'
+    OUTPUTSCHEMA (report = 'report' : REGISTER OF (
+        "QueryResult" = 'QueryResult' : REGISTER OF (
+            "IsFinished" = 'IsFinished' : 'java.lang.Boolean',
+            "ResultXml" = 'ResultXml' : REGISTER OF (
+                rowset = 'rowset' : REGISTER OF (
+                    "Row" = 'Row' : ARRAY OF (
+                        "Row" = 'Row' : REGISTER OF (
+                            "Column0" = 'Column0' : 'java.lang.Short',
+                            "Column2" = 'Column2' : 'java.lang.String',
+                            "Column3" = 'Column3' : 'java.lang.Short',
+                            "Column4" = 'Column4' : 'java.lang.String',
+                            "Column5" = 'Column5' : 'java.lang.String'
+                        )
+                    )
+                )
+            )
+        )
+    )
+    );
+
+CREATE OR REPLACE TYPE "ds_alma_QueryResult_ResultXml_rowset_Row_Row" AS REGISTER OF ("Column0":int, "Column2":text, "Column3":int, "Column4":text, "Column5":text);
+
+CREATE OR REPLACE TYPE "ds_alma_QueryResult_ResultXml_rowset_Row" AS ARRAY OF "ds_alma_QueryResult_ResultXml_rowset_Row_Row";
+
+CREATE OR REPLACE TYPE "ds_alma_QueryResult_ResultXml_rowset" AS REGISTER OF ("Row":"ds_alma_QueryResult_ResultXml_rowset_Row");
+
+CREATE OR REPLACE TYPE "ds_alma_QueryResult_ResultXml" AS REGISTER OF (rowset:"ds_alma_QueryResult_ResultXml_rowset");
+
+CREATE OR REPLACE TYPE "ds_alma_QueryResult" AS REGISTER OF ("IsFinished":boolean, "ResultXml":"ds_alma_QueryResult_ResultXml");
+
+CREATE OR REPLACE TABLE bv_alma I18N au_cst (
+        "QueryResult":"ds_alma_QueryResult"
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_alma(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD "QueryResult" NOS ZERO ()
+             ADD "QueryResult"."IsFinished" NOS ZERO ()
+             ADD "QueryResult"."ResultXml" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column0" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column2" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column3" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column4" NOS ZERO ()
+             ADD "QueryResult"."ResultXml".rowset."Row"."Column5" NOS ZERO ()
+        )
+        OUTPUTLIST ("QueryResult"
+        )
+        WRAPPER (xml bv_alma)
+    );
+
