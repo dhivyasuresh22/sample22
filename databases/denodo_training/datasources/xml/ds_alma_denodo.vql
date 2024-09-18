@@ -1,0 +1,7 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE XML ds_alma_denodo
+    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' GET '${databases.denodo_training.datasources.xml.ds_alma_denodo.ROUTE.HTTP.URL}'
+    AUTHENTICATION OFF
+    PROXY OFF
+    IGNORE_ROUTE_ERRORS = TRUE;
+

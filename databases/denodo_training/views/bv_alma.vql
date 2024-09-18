@@ -1,6 +1,6 @@
 ﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
 CREATE OR REPLACE WRAPPER XML ds_alma
-    DATASOURCENAME=ds_alma
+    DATASOURCENAME=ds_alma_denodo
     TUPLEROOT 'report'
     ROUTE HTTP 'http.CommonsHttpClientConnection,120000' GET '${databases.denodo_training.views.xml.ds_alma.ROUTE.HTTP.URL}'
     OUTPUTSCHEMA (report = 'report' : REGISTER OF (
