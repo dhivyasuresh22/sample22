@@ -1,0 +1,5 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE JSON ds_json_ich
+    ROUTE LOCAL 'LocalConnection' '${databases.dhivya_training.datasources.json.ds_json_ich.ROUTE.LOCAL.PATH}'
+    IGNORE_ROUTE_ERRORS = TRUE;
+

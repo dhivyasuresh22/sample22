@@ -1,0 +1,2 @@
+﻿CREATE OR REPLACE VIEW v2 AS SELECT 1 FROM dual() CONTEXT ('I18N' = 'au_cst');
+

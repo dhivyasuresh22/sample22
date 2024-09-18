@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE DATABASE dhivya_training;
+
+ALTER DATABASE dhivya_training
+  CHARSET DEFAULT;
+

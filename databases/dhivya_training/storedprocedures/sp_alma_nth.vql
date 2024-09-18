@@ -1,0 +1,11 @@
+﻿CREATE OR REPLACE VQL PROCEDURE sp_alma_nth
+(idvql OUT VARCHAR)
+AS (
+    varname VARCHAR;
+)
+BEGIN
+    EXECUTE 'select "IsFinished" from dhivya_training.flatten_bv_nth_alma_xml limit 1';
+    RETURN ROW ( idvql) VALUES (varname);
+
+END;
+

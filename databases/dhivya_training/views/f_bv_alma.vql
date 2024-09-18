@@ -1,0 +1,2 @@
+﻿CREATE OR REPLACE VIEW f_bv_alma AS SELECT "IsFinished", "Column0", "Column2", "Column3", "Column4", "Column5" FROM FLATTEN bv_alma AS v ( v."QueryResult"."ResultXml".rowset."Row") CONTEXT ('I18N' = 'au_cst');
+

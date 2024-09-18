@@ -1,0 +1,2 @@
+﻿CREATE OR REPLACE VIEW flatten_bv_nth_alma_xml FOLDER = '/sp-nth-5482-24-47' AS SELECT "IsFinished", "Column0", "Column2", "Column3", "Column4", "Column5", "Column6", "Column1" FROM FLATTEN bv_nth_alma_xml AS v ( v."QueryResult"."ResultXml".rowset."Row") CONTEXT ('I18N' = 'au_cst');
+

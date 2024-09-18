@@ -1,0 +1,16 @@
+﻿CREATE OR REPLACE VQL PROCEDURE sp_alma_api(ContentType out varchar,ResponseText out varchar(100), url out varchar(100))
+AS (ContentType VARCHAR(70);
+ResponseText varchar(100);
+Status VARCHAR(32);
+URL VARCHAR(100);
+--Result INTeger;
+--Method VARCHAR(10);
+--ErrorMessage VARCHAR(100);
+) 
+BEGIN 
+ContentType := 'application/xml';
+Method := 'GET';
+URL := 'https://api-ap.hosted.exlibrisgroup.com/almaws/v1/analytics/reports?token=7FDC66AC96B25EAB5D47DADC14CDE25DB0CD50E428D7053E3AAF8ED3C872C8993D089BF260055807E9214239E186A006677D3AD05EDC3CA7F06182E34E9D7A2F';
+return row (url) values (url);
+END;
+

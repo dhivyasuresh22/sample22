@@ -1,0 +1,5 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+UNDEPLOY IF EXISTS WEBSERVICE "getAllProducts";
+
+DEPLOY WEBSERVICE "getAllProducts" LOGIN = '${databases.dhivya_training.webcontainer.webservices.getallproducts.LOGIN}' PASSWORD = '${databases.dhivya_training.webcontainer.webservices.getallproducts.PASSWORD}' ${databases.dhivya_training.webcontainer.webservices.getallproducts.PASSWORD.ENCRYPTED};
+
