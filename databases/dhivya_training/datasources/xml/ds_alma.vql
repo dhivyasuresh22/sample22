@@ -1,0 +1,4 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE XML ds_alma
+    ROUTE LOCAL 'LocalConnection' '${databases.dhivya_training.datasources.xml.ds_alma.ROUTE.LOCAL.PATH}';
+
