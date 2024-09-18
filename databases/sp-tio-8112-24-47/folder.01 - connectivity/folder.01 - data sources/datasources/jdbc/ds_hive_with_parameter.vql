@@ -1,0 +1,33 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE JDBC ds_hive_with_parameter
+    FOLDER = '/01 - connectivity/01 - data sources'
+    DRIVERCLASSNAME = 'org.apache.hive.jdbc.HiveDriver'
+    DATABASEURI = '${databases.sp-tio-8112-24-47.folder.01 - connectivity.folder.01 - data sources.datasources.jdbc.ds_hive_with_parameter.DATABASEURI}'
+    USERNAME = '${databases.sp-tio-8112-24-47.folder.01 - connectivity.folder.01 - data sources.datasources.jdbc.ds_hive_with_parameter.USERNAME}'
+    USERPASSWORD = ''
+    USE_KERBEROS ( 
+        KRB_USERNAME = '${databases.sp-tio-8112-24-47.folder.01 - connectivity.folder.01 - data sources.datasources.jdbc.ds_hive_with_parameter.KRB_USERNAME}'
+        KRB_USERPASSWORD = '${databases.sp-tio-8112-24-47.folder.01 - connectivity.folder.01 - data sources.datasources.jdbc.ds_hive_with_parameter.KRB_USERPASSWORD}' ${databases.sp-tio-8112-24-47.folder.01 - connectivity.folder.01 - data sources.datasources.jdbc.ds_hive_with_parameter.KRB_USERPASSWORD.ENCRYPTED}
+    ) 
+    CLASSPATH = 'hive-2.0.0'
+    DATABASENAME = 'hive'
+    DATABASEVERSION = '2_0_0'
+    FETCHSIZE = 1000
+    VALIDATIONQUERY = 'select 1'
+    INITIALSIZE = 4
+    MAXIDLE = -1
+    MINIDLE = 0
+    MAXACTIVE = 20
+    EXHAUSTEDACTION = 1
+    TESTONBORROW = true
+    TESTONRETURN = false
+    TESTWHILEIDLE = false
+    TIMEBETWEENEVICTION = -1
+    NUMTESTPEREVICTION = 3
+    MINEVICTABLETIME = 1800000
+    POOLPREPAREDSTATEMENTS = false
+    MAXOPENPREPAREDSTATEMENTS = -1
+    DATA_LOAD_CONFIGURATION (
+        BATCHINSERTSIZE = 200
+    );
+
