@@ -1,2 +1,0 @@
-﻿CREATE OR REPLACE VIEW proc_result AS SELECT * FROM bv_alma_api_nth_resumption_token;
-
