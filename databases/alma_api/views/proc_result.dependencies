@@ -1,0 +1,3 @@
+﻿/databases/alma_api/datasources/xml/ds_alma_api_nth_resumption_token.vql
+/databases/alma_api/views/bv_alma_api_nth_resumption_token.vql
+/databases/alma_api/views/bv_alma_api_nth_resumption_token_flatten.vql

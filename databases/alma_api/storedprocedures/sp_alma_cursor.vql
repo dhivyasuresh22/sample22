@@ -1,19 +1,19 @@
-﻿CREATE OR REPLACE VQL PROCEDURE sp_alma_cursor(idd out integer, name out varchar, sheet_name out varchar)
-/* ,"Column0" out varchar,"Column2" out varchar,"Column3" out varchar,"Column4" out varchar,"Column5" out varchar,"Column6" out varchar,"Column1" out varchar)*/
-AS (  
-    CURSOR cursordata IS 'SELECT * from denodo_training.bv_excel_nth';  
-    varname1 cursordata%ROWTYPE;  
-)  
-BEGIN  
-    OPEN cursordata;  
-    LOOP   
-        FETCH cursordata INTO varname1;  
-IF varname1.idd = '1' THEN 
- RETURN ROW (idd,name, sheet_name) /* ,"Column0","Column2","Column3","Column4","Column5","Column6","Column1") */
-VALUES (varname1.idd, varname1.name, varname1.sheet_name)/*, varname1."Column0", varname1."Column2", varname1."Column3",varname1."Column4",varname1."Column5",varname1."Column6",varname1."Column1")*/;  
-END IF;
-        EXIT WHEN cursordata%NOTFOUND;  
-    END LOOP;  
+﻿CREATE OR REPLACE VQL PROCEDURE sp_alma_cursor
+(Column0 OUT VARCHAR, Column2 OUT VARCHAR, Column3 OUT VARCHAR, Column4 OUT VARCHAR, Column5 OUT VARCHAR, Column6 OUT VARCHAR, Column1 OUT VARCHAR)
+AS (
+    CURSOR cursordata IS 'SELECT * from bv_alma_api_nth_resumption_token_flatten';
+    varname1 cursordata%ROWTYPE;
+)
+BEGIN
+    OPEN cursordata;
+    LOOP 
+        FETCH cursordata INTO varname1;
+        IF varname1."IsFinished" = 'false' THEN 
+                RETURN ROW ( Column0, Column2, Column3, Column4, Column5, Column6, Column1) VALUES (varname1.Column0, varname1.Column2, varname1.Column3, varname1.Column4, varname1.Column5, varname1.Column6, varname1.Column1);
+            END IF; 
+        EXIT WHEN cursordata%NOTFOUND;
+    END LOOP;
     CLOSE cursordata;
- END;
+
+END;
 

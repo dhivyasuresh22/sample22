@@ -1,0 +1,2 @@
+﻿CREATE OR REPLACE VIEW bv_alma_api_nth_resumption_token_flatten AS SELECT "ResumptionToken", "IsFinished", "Column0", "Column1", "Column2", "Column3", "Column4", "Column5", "Column6", "Column7", "Column8", "Column9", "Column10", "Column11", "Column12", "Column13", "Column14", "Column15", "Column18", "Column19", "Column16", "Column17" FROM FLATTEN bv_alma_api_nth_resumption_token AS v ( v."QueryResult"."ResultXml".rowset."Row");
+
