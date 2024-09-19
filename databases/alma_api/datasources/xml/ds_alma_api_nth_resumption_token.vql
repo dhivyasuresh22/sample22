@@ -1,0 +1,7 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE XML ds_alma_api_nth_resumption_token
+    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' GET '${databases.alma_api.datasources.xml.ds_alma_api_nth_resumption_token.ROUTE.HTTP.URL}'
+    AUTHENTICATION OFF
+    PROXY OFF
+    IGNORE_ROUTE_ERRORS = TRUE;
+
